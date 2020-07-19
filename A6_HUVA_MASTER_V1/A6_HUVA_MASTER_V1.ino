@@ -19,6 +19,17 @@
 // * THE SIM900 NEEDS 500+ uF CAPACITOR PARALLE TO THE POWER TO PREVENT FROM SURGE DYING
 
 /////////////////////////////////   HEADERS   /////////////////////////////////////////////
+/*
+ * COLOURS FOR REFERENCE
+ * RGB_color(255, 0, 0); // Red
+   RGB_color(0, 255, 0); // Green
+   RGB_color(0, 0, 255); // Blue
+   RGB_color(255, 255, 125); // Raspberry
+   RGB_color(0, 255, 255); // Cyan
+   RGB_color(255, 0, 255); // Magenta
+   RGB_color(255, 255, 0); // Yellow
+   RGB_color(255, 255, 255); // White
+  */
 #include <SoftwareSerial.h> // Library for using serial communication
 SoftwareSerial SIM900(3, 2); // Pins 7, 8 are used as used as software serial pins
 
@@ -26,6 +37,10 @@ SoftwareSerial SIM900(3, 2); // Pins 7, 8 are used as used as software serial pi
 #define BUZZER_PIN  9
 #define LED_PIN     7
 #define BUTTON_PIN  8
+
+#define LED_RED_PIN 3
+#define LED_GREEN_PIN 5
+#define LED_BLUE_PIN  6
 
 String incomingData = "";   // for storing incoming serial data
 String message = "";   // A String for storing the message
@@ -65,6 +80,10 @@ void setup(){
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
 
+    pinMode(LED_RED_PIN, OUTPUT);
+  pinMode(LED_GREEN_PIN, OUTPUT);
+  pinMode(LED_BLUE_PIN, OUTPUT);
+
   digitalWrite(BUZZER_PIN, LOW);
 
  delay(10000); //Let the GSM module connect
@@ -90,7 +109,7 @@ void setup(){
 
   Serial.println("gprs initialize done!");
     Serial.println("start to send message ...");
-    digitalWrite(LED_PIN, HIGH);
+    RGB_color(0, 0, 255); // Blue
     
 }
     
@@ -246,7 +265,6 @@ void CheckButton()
           float PressTime = millis() - Clock ; 
 
                    
-//          Serial.println (PressTime);
           delay(50);
           
           if (PressTime > 2000)
@@ -278,16 +296,9 @@ void CheckButton()
           Serial.println("SMS Sent1");
           delay(3000);
           receive_message();
-//          wait = true;
-//          send_message_demo2(DemoMessage2); 
-//          receive_message();
-             
-//          delay(2000);
-          
+
           Serial.println("SMS Sent2");
-//          incomingData.remove(0);
-          
-          //SIM900.println("AT+CMGD=,4");    
+ 
 
               delay(3000);
                 Alert();
@@ -316,9 +327,9 @@ void Alert(){
  
         
   
-    digitalWrite(LED_PIN, HIGH);
+   RGB_color(255, 0, 0); // Red
     delay(50);
-    digitalWrite(LED_PIN, LOW);
+   RGB_color(0, 0, 0); // Off
     delay(50);
     
       Timer++;
@@ -335,9 +346,9 @@ void Alert(){
             if (AlertBeeper == "OFF")
         {
   
-    digitalWrite(LED_PIN, HIGH);
+    RGB_color(255, 0, 0); // Red
     delay(500);
-    digitalWrite(LED_PIN, LOW);
+   RGB_color(0, 0, 0); // Off
     delay(500);
     
       Timer++;
@@ -379,15 +390,15 @@ void Beeper()
       while (Counter < 10)
   {
       digitalWrite(BUZZER_PIN, HIGH);
-      digitalWrite(LED_PIN, HIGH);
+     RGB_color(0, 255, 0); // Green
       delay(50);
       digitalWrite(BUZZER_PIN, LOW);
-      digitalWrite(LED_PIN, LOW);
+      RGB_color(0, 0, 0); // Off
       delay(50);  
 
         Counter++;
   }
-    digitalWrite(LED_PIN, HIGH);
+  RGB_color(0, 255, 0); // Green
   }
 
 
@@ -396,15 +407,15 @@ void Beeper()
       while (Counter < 10)
   {
       
-      digitalWrite(LED_PIN, HIGH);
+       RGB_color(0, 255, 0); // Green
       delay(50);
       
-      digitalWrite(LED_PIN, LOW);
+      RGB_color(0, 0, 0); // Off
       delay(50);  
 
         Counter++;
   }
-    digitalWrite(LED_PIN, HIGH);
+     RGB_color(0, 255, 0); // Green
   }
   
 }
@@ -484,4 +495,12 @@ void receive_message()
     }
      
   
+}
+
+//============ RGB LED COLOUR GOVERNING CODE ===============\\
+void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
+ {
+  analogWrite(LED_RED_PIN, red_light_value);
+  analogWrite(LED_GREEN_PIN, green_light_value);
+  analogWrite(LED_BLUE_PIN, blue_light_value);
 }
