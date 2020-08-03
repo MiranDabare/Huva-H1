@@ -117,7 +117,7 @@ void setup(){
 
 void loop()
 {
- Test3();
+ Test4();
 
 } 
 
@@ -173,7 +173,7 @@ void Test2() // Button Testing
   
 }
 
-void Test3()
+void Test3()// Remote Recieve test
 {
   bool State = digitalRead(REMOTE_PIN);
 
@@ -191,5 +191,29 @@ void Test3()
     RGB_color(255, 255, 0); // Blue
   }
 
+  
+}
+
+void Test4()
+{
+    bool State = digitalRead(BUTTON_PIN);
+     RGB_color(255, 255, 0); // Yellow
+  
+  if(State == HIGH)
+  {
+ 
+   Serial.println("Im in High");
+   digitalWrite(BUZZER_PIN, LOW);
+  RGB_color(255, 255, 0); // Yellow
+  
+  }
+  
+  if(State == LOW)
+  {
+    Serial.println("Im in Low");
+    digitalWrite(BUZZER_PIN, HIGH);
+    RGB_color(0, 0, 255); // Blue
+   
+  }
   
 }
