@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// HUVA FUNCTION TESTER ///////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
-//  DATE CREATED  : 1 JULY 2020
-//  VERSION       : 3
+//  DATE CREATED  : 3 AUGUST 2020
+//  VERSION       : 1
 //  PROGRAMMER    : MIRAN DABARE
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -53,11 +53,13 @@ String ServerNumber2 = "+94778755176";
 
 String DemoNumber2  = "+94764035418";
 String DemoNumber1  = "+94774701366";
+String TestNumber  = "+94774061725";
 
 String DemoMessage1 = "SEC12345 TRIGGER SILENT";
 String DemoMessage2 = "SEC12345 TRIGGER LOUD";
 String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
 String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
+String TestMessage = "This module is working fine :)";
 
 String SecurityKey = "SEC12345";
 
@@ -67,7 +69,7 @@ String SecurityKey = "SEC12345";
 bool Pressed = false;
 String BeeperOn = "OFF";
 String AlertBeeper = "OFF";
- bool wait = true;
+bool Pass = false;
 
 // //============ RGB LED COLOUR GOVERNING CODE ===============\\
 //void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
@@ -117,7 +119,7 @@ void setup(){
 
 void loop()
 {
- Test4();
+ Test5();
 
 } 
 
@@ -194,7 +196,7 @@ void Test3()// Remote Recieve test
   
 }
 
-void Test4()
+void Test4() // Buzzer Test
 {
     bool State = digitalRead(BUTTON_PIN);
      RGB_color(255, 255, 0); // Yellow
@@ -216,4 +218,66 @@ void Test4()
    
   }
   
+}
+
+
+void Test5()
+{
+   if (Pass == false)
+   {
+    Test5_Init();
+   }
+}
+
+void Test5_Init()
+{
+   RGB_color(255, 0, 0); // R
+   
+      digitalWrite(GSM_PIN, HIGH);
+
+        delay(5000);
+ 
+
+  SIM900.begin(9600); // baudrate for GSM shield
+
+   SIM900.print("AT+CUSD=0\r"); 
+  delay(100);
+
+
+   // set SMS mode to text mode
+  SIM900.print("AT+CMGF=1\r");  
+  delay(100);
+  
+  // set gsm module to tp show the output on serial out
+  SIM900.print("AT+CNMI=2,2,0,0,0\r"); 
+  delay(100);
+
+ 
+  SIM900.println("AT+CMGD=1,4\r");  
+  delay(5000);
+
+  Serial.println("gprs initialize done!");
+    Serial.println("start to send message ...");
+    RGB_color(0, 0, 255); // Blue
+
+
+
+    SIM900.print("AT+CUSD=0\r"); 
+    delay(1000);
+  SIM900.println("AT+CMGF=1");    //Set the GSM Module in Text Mode
+  delay(1000);  
+    SIM900.println("AT+CMGS=\"" + TestNumber + "\""); // Replace it with your mobile number
+  delay(1000);
+  SIM900.println(TestMessage);   // The SMS text you want to send
+  delay(1000);
+  SIM900.println((char)26);  // ASCII code of CTRL+Z
+  delay(1000);
+  SIM900.println();
+  delay(2000);  
+  SIM900.print("AT+CUSD=2\r"); 
+  RGB_color(0, 255, 255); // Blue
+  
+  Pass =true;
+  
+    
 }
