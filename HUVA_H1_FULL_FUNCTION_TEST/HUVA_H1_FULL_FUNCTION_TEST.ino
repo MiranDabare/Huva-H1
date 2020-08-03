@@ -103,7 +103,7 @@ void setup(){
  
   Serial.begin(9600); // baudrate for serial monitor
 
-   Test1();
+  
     
 }
     
@@ -117,7 +117,7 @@ void setup(){
 
 void loop()
 {
-
+ Test2();
 
 } 
 
@@ -151,4 +151,24 @@ void Test1()
   delay(2000);
   RGB_color(0, 0, 0); // Off
   delay(2000);
+}
+
+void Test2()
+{
+  bool State = digitalRead(BUTTON_PIN);
+  
+  if(State == HIGH)
+  {
+ 
+   Serial.println("Im in High");
+   RGB_color(0, 0, 255); // Blue
+  
+  }
+  
+  if(State == LOW)
+  {
+    Serial.println("Im in Low");
+    RGB_color(255, 0, 0); // Blue
+  }
+  
 }
