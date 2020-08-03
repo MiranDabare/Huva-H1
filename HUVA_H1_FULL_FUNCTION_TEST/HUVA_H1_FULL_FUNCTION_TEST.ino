@@ -70,6 +70,7 @@ bool Pressed = false;
 String BeeperOn = "OFF";
 String AlertBeeper = "OFF";
 bool Pass = false;
+bool GSMPass = false;
 
 // //============ RGB LED COLOUR GOVERNING CODE ===============\\
 //void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
@@ -119,7 +120,7 @@ void setup(){
 
 void loop()
 {
- Test5();
+ Test6();
 
 } 
 
@@ -235,22 +236,22 @@ void Test5_Init()
    
       digitalWrite(GSM_PIN, HIGH);
 
-        delay(5000);
+        delay(10000);
  
 
   SIM900.begin(9600); // baudrate for GSM shield
 
    SIM900.print("AT+CUSD=0\r"); 
-  delay(100);
+  delay(2000);
 
 
    // set SMS mode to text mode
   SIM900.print("AT+CMGF=1\r");  
-  delay(100);
+  delay(2000);
   
   // set gsm module to tp show the output on serial out
   SIM900.print("AT+CNMI=2,2,0,0,0\r"); 
-  delay(100);
+  delay(2000);
 
  
   SIM900.println("AT+CMGD=1,4\r");  
@@ -263,15 +264,15 @@ void Test5_Init()
 
 
     SIM900.print("AT+CUSD=0\r"); 
-    delay(1000);
+    delay(2000);
   SIM900.println("AT+CMGF=1");    //Set the GSM Module in Text Mode
-  delay(1000);  
+  delay(2000);  
     SIM900.println("AT+CMGS=\"" + TestNumber + "\""); // Replace it with your mobile number
-  delay(1000);
+  delay(2000);
   SIM900.println(TestMessage);   // The SMS text you want to send
-  delay(1000);
+  delay(2000);
   SIM900.println((char)26);  // ASCII code of CTRL+Z
-  delay(1000);
+  delay(2000);
   SIM900.println();
   delay(2000);  
   SIM900.print("AT+CUSD=2\r"); 
@@ -281,3 +282,75 @@ void Test5_Init()
   
     
 }
+
+
+void Test6()
+{
+   if (Pass == false)
+   {
+    Test6_Init();
+   }
+   
+   RGB_color(0, 255, 0);
+}
+
+void Test6_Init()
+{
+   RGB_color(255, 0, 0); // R
+   
+      digitalWrite(GSM_PIN, HIGH);
+
+        delay(10000);
+ 
+
+  SIM900.begin(9600); // baudrate for GSM shield
+  receive_message();
+
+ delay(2000);
+
+   // set SMS mode to text mode
+  SIM900.print("AT+CMGF=1\r");  
+
+  delay(2000);
+  
+  // set gsm module to tp show the output on serial out
+  SIM900.print("AT+CNMI=2,2,0,0,0\r"); 
+  
+  delay(2000);
+
+ 
+  SIM900.println("AT+CMGD=1,4\r");  
+ 
+  delay(5000);
+
+  Serial.println("gprs initialize done!");
+    Serial.println("start to send message ...");
+    RGB_color(0, 0, 255); // Blue
+
+    while (GSMPass == false)
+    {
+      RGB_color(255, 255, 0);
+      receive_message();
+      
+      if(incomingData.indexOf("CONSOLETEST")>=0)
+      {
+        Test1();
+        GSMPass = true;
+       }
+    }
+    
+    Pass = true;
+ 
+}
+
+void receive_message()
+{
+  if (SIM900.available() > 0)
+  {
+    incomingData = SIM900.readString(); // Get the data from the serial port.
+   
+    Serial.print(incomingData); 
+    delay(10); 
+
+    }
+   }
