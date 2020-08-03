@@ -39,7 +39,7 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define LED_GREEN_PIN 5
 #define LED_BLUE_PIN  6
 
-#define REMOTE_PIN  8
+#define REMOTE_PIN  7
 #define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
 String incomingData = "";   // for storing incoming serial data
@@ -117,7 +117,7 @@ void setup(){
 
 void loop()
 {
- Test2();
+ Test3();
 
 } 
 
@@ -153,7 +153,7 @@ void Test1()
   delay(2000);
 }
 
-void Test2()
+void Test2() // Button Testing
 {
   bool State = digitalRead(BUTTON_PIN);
   
@@ -170,5 +170,26 @@ void Test2()
     Serial.println("Im in Low");
     RGB_color(255, 0, 0); // Blue
   }
+  
+}
+
+void Test3()
+{
+  bool State = digitalRead(REMOTE_PIN);
+
+    if(State == HIGH)
+  {
+ 
+   Serial.println("Im in High");
+   RGB_color(0, 255, 255); // Blue
+  
+  }
+  
+  if(State == LOW)
+  {
+    Serial.println("Im in Low");
+    RGB_color(255, 255, 0); // Blue
+  }
+
   
 }
