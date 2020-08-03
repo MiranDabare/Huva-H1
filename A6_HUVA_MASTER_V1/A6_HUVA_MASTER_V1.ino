@@ -29,12 +29,12 @@
    RGB_color(255, 255, 255); // White
   */
 #include <SoftwareSerial.h> // Library for using serial communication
-SoftwareSerial SIM900(3, 2); // Pins 7, 8 are used as used as software serial pins
+SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial pins
 
 
 #define BUZZER_PIN  9
-#define LED_PIN     7
-#define BUTTON_PIN  8
+#define GSM_PIN     4
+#define BUTTON_PIN  2
 
 #define LED_RED_PIN 3
 #define LED_GREEN_PIN 5
@@ -67,8 +67,16 @@ String BeeperOn = "OFF";
 String AlertBeeper = "OFF";
  bool wait = true;
 
+// //============ RGB LED COLOUR GOVERNING CODE ===============\\
+//void RGB_color(int red_light_value, int green_light_value, int blue_light_value){
+//  analogWrite(LED_RED_PIN, red_light_value);
+//  analogWrite(LED_GREEN_PIN, green_light_value);
+//  analogWrite(LED_BLUE_PIN, blue_light_value);
+//}
 
  void(* resetFunc) (void) = 0;
+
+
 
 /////////////////////////////////   SETUP   /////////////////////////////////////////////
 
@@ -76,15 +84,18 @@ void setup(){
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   pinMode(BUZZER_PIN, OUTPUT);
-  pinMode(LED_PIN, OUTPUT);
+  pinMode(GSM_PIN, OUTPUT);
 
     pinMode(LED_RED_PIN, OUTPUT);
   pinMode(LED_GREEN_PIN, OUTPUT);
   pinMode(LED_BLUE_PIN, OUTPUT);
 
   digitalWrite(BUZZER_PIN, LOW);
+    digitalWrite(GSM_PIN, LOW);
 
  delay(10000); //Let the GSM module connect
+
+    digitalWrite(GSM_PIN, HIGH);
  
   Serial.begin(9600); // baudrate for serial monitor
   SIM900.begin(9600); // baudrate for GSM shield
@@ -107,13 +118,12 @@ void setup(){
 
   Serial.println("gprs initialize done!");
     Serial.println("start to send message ...");
-    RGB_color(0, 0, 255); // Blue
+//    RGB_color(0, 0, 255); // Blue
     
 }
     
 
  
-
 
 
 
@@ -325,9 +335,9 @@ void Alert(){
  
         
   
-   RGB_color(255, 0, 0); // Red
+//   RGB_color(255, 0, 0); // Red
     delay(50);
-   RGB_color(0, 0, 0); // Off
+//   RGB_color(0, 0, 0); // Off
     delay(50);
     
       Timer++;
@@ -344,9 +354,9 @@ void Alert(){
             if (AlertBeeper == "OFF")
         {
   
-    RGB_color(255, 0, 0); // Red
+//    RGB_color(255, 0, 0); // Red
     delay(500);
-   RGB_color(0, 0, 0); // Off
+//   RGB_color(0, 0, 0); // Off
     delay(500);
     
       Timer++;
@@ -361,7 +371,7 @@ void Alert(){
     }
 
     
-    digitalWrite(LED_PIN, LOW);
+//    RGB_color(0, 0, 0); // Off
     
  
   resetFunc();
@@ -381,6 +391,7 @@ void Alert(){
 
 void Beeper()
 {
+  
   int Counter = 0;
 
       if (BeeperOn.indexOf("ON")>=0)
@@ -388,15 +399,15 @@ void Beeper()
       while (Counter < 10)
   {
       digitalWrite(BUZZER_PIN, HIGH);
-     RGB_color(0, 255, 0); // Green
+//     RGB_color(0, 255, 0); // Green
       delay(50);
       digitalWrite(BUZZER_PIN, LOW);
-      RGB_color(0, 0, 0); // Off
+//      RGB_color(0, 0, 0); // Off
       delay(50);  
 
         Counter++;
   }
-  RGB_color(0, 255, 0); // Green
+//  RGB_color(0, 255, 0); // Green
   }
 
 
@@ -405,15 +416,15 @@ void Beeper()
       while (Counter < 10)
   {
       
-       RGB_color(0, 255, 0); // Green
+//       RGB_color(0, 255, 0); // Green
       delay(50);
       
-      RGB_color(0, 0, 0); // Off
+//      RGB_color(0, 0, 0); // Off
       delay(50);  
 
         Counter++;
   }
-     RGB_color(0, 255, 0); // Green
+//     RGB_color(0, 255, 0); // Green
   }
   
 }
@@ -493,12 +504,4 @@ void receive_message()
     }
      
   
-}
-
-//============ RGB LED COLOUR GOVERNING CODE ===============\\
-void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
- {
-  analogWrite(LED_RED_PIN, red_light_value);
-  analogWrite(LED_GREEN_PIN, green_light_value);
-  analogWrite(LED_BLUE_PIN, blue_light_value);
 }
