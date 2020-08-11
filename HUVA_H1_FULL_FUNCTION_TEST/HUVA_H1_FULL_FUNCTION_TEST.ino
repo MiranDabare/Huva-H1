@@ -41,7 +41,7 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 
 #define REMOTE_PIN  7
 #define SIREN_PIN  8
-#define RF_ENABLE_PIN  12 //Pull this down before transmitting
+//#define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
 String incomingData = "";   // for storing incoming serial data
 String message = "";   // A String for storing the message
@@ -72,6 +72,7 @@ String BeeperOn = "OFF";
 String AlertBeeper = "OFF";
 bool Pass = false;
 bool GSMPass = false;
+bool ConsolePass = false;
 
 // //============ RGB LED COLOUR GOVERNING CODE ===============\\
 //void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
@@ -97,13 +98,13 @@ void setup(){
   pinMode(LED_RED_PIN, OUTPUT);
   pinMode(LED_GREEN_PIN, OUTPUT);
   pinMode(LED_BLUE_PIN, OUTPUT);
-  pinMode(RF_ENABLE_PIN, OUTPUT);
+//  pinMode(RF_ENABLE_PIN, OUTPUT);
 
   digitalWrite(BUZZER_PIN, LOW);
   digitalWrite(GSM_PIN, LOW);
 
-  digitalWrite(SIREN_PIN, HIGH);
-  digitalWrite(RF_ENABLE_PIN, HIGH);
+  digitalWrite(SIREN_PIN, LOW);
+//  digitalWrite(RF_ENABLE_PIN, HIGH);
 
 
  
@@ -124,8 +125,57 @@ void setup(){
 void loop()
 {
 
- Test7();
+// while (ConsolePass == false){
+//Serial.println ("Conducting Test 1 - LED");
+//  Test1();
+//
+//float Timer = millis();
+// Serial.println ("Conducting Test 2 - BUTTON");
+//  while ((millis() - Timer) <10000)
+//  {
+//    Test2();
+//  }
+//  
+// Timer = millis();
+// Serial.println ("Conducting Test 3 - REMOTE");
+//    while ((millis() - Timer) <20000)
+//  {
+//    Test3();
+//  }
+//
+//   Timer = millis();
+//   Serial.println ("Conducting Test 4 - BUZZER");
+//    while ((millis() - Timer) <20000)
+//  {
+//    Test4();
+//  }
+//
+//   Timer = millis();
+//   Serial.println ("Conducting Test 5 - SMS Sending");
+//    while ((millis() - Timer) <60000)
+//  {
+//    Test5();
+//  }
+//
+//   Timer = millis();
+//    Serial.println ("Conducting Test 6 - SMS Recieving");
+//    while ((millis() - Timer) <60000)
+//  {
+//    Test6();
+//  }
+//
+//     Timer = millis();
+//    Serial.println ("Conducting Test 7 - Siren");
+//    while ((millis() - Timer) <30000)
+//  {
+//    Test7();
+//  }
+//  
+//
+//ConsolePass = true;
+//}
 
+ Test7();
 } 
 
 
@@ -188,7 +238,7 @@ void Test3()// Remote Recieve test
   {
  
    Serial.println("Im in High");
-   RGB_color(0, 255, 255); // Blue
+   RGB_color(0, 0, 255); // Blue
   
   }
   
@@ -204,7 +254,7 @@ void Test3()// Remote Recieve test
 void Test4() // Buzzer Test
 {
     bool State = digitalRead(BUTTON_PIN);
-     RGB_color(255, 255, 0); // Yellow
+     RGB_color(0, 255, 0); // Yellow
   
   if(State == HIGH)
   {
@@ -226,7 +276,7 @@ void Test4() // Buzzer Test
 }
 
 
-void Test5()
+void Test5() // GSM SMS Sending Test
 {
    if (Pass == false)
    {
@@ -288,7 +338,7 @@ void Test5_Init()
 }
 
 
-void Test6()
+void Test6() // GSM SMS Reciving Test (CONSOLETEST)
 {
    if (Pass == false)
    {
@@ -307,7 +357,7 @@ void Test6_Init()
         delay(10000);
  
 
-  SIM900.begin(9600); // baudrate for GSM shield
+ // SIM900.begin(9600); // baudrate for GSM shield
   receive_message();
 
  delay(2000);
@@ -360,7 +410,7 @@ void receive_message()
    }
 
 
-void Test7()
+void Test7() //Siren Transmitter Test
 {
  bool State = digitalRead(BUTTON_PIN);
    RGB_color(0, 0, 255); // Blue
@@ -368,14 +418,14 @@ void Test7()
   if(State == LOW)
   {
     digitalWrite(SIREN_PIN, LOW);
-    digitalWrite(RF_ENABLE_PIN, LOW);
+//    digitalWrite(RF_ENABLE_PIN, LOW);
     RGB_color(0, 255, 255); // Blue
   }
 
     if(State == HIGH)
   {
     digitalWrite(SIREN_PIN, HIGH);
-    digitalWrite(RF_ENABLE_PIN, HIGH);
+//    digitalWrite(RF_ENABLE_PIN, LOW);
     RGB_color(255, 255, 0); // Blue
   }
 }
