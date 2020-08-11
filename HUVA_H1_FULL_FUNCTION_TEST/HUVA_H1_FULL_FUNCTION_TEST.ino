@@ -40,6 +40,7 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define LED_BLUE_PIN  6
 
 #define REMOTE_PIN  7
+#define SIREN_PIN  8
 #define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
 String incomingData = "";   // for storing incoming serial data
@@ -100,7 +101,9 @@ void setup(){
 
   digitalWrite(BUZZER_PIN, LOW);
   digitalWrite(GSM_PIN, LOW);
-  digitalWrite(RF_ENABLE_PIN, LOW);
+
+  digitalWrite(SIREN_PIN, HIGH);
+  digitalWrite(RF_ENABLE_PIN, HIGH);
 
 
  
@@ -120,7 +123,8 @@ void setup(){
 
 void loop()
 {
- Test6();
+
+ Test7();
 
 } 
 
@@ -354,3 +358,25 @@ void receive_message()
 
     }
    }
+
+
+void Test7()
+{
+ bool State = digitalRead(BUTTON_PIN);
+   RGB_color(0, 0, 255); // Blue
+
+  if(State == LOW)
+  {
+    digitalWrite(SIREN_PIN, LOW);
+    digitalWrite(RF_ENABLE_PIN, LOW);
+    RGB_color(0, 255, 255); // Blue
+  }
+
+    if(State == HIGH)
+  {
+    digitalWrite(SIREN_PIN, HIGH);
+    digitalWrite(RF_ENABLE_PIN, HIGH);
+    RGB_color(255, 255, 0); // Blue
+  }
+}
+  
