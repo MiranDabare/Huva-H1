@@ -41,7 +41,7 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 
 #define REMOTE_PIN  7
 #define SIREN_PIN  8
-//#define RF_ENABLE_PIN  12 //Pull this down before transmitting
+#define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
 String incomingData = "";   // for storing incoming serial data
 String message = "";   // A String for storing the message
@@ -104,7 +104,7 @@ void setup(){
   digitalWrite(GSM_PIN, LOW);
 
   digitalWrite(SIREN_PIN, LOW);
-//  digitalWrite(RF_ENABLE_PIN, HIGH);
+  digitalWrite(RF_ENABLE_PIN, HIGH);
 
 
  
@@ -175,7 +175,7 @@ void loop()
 //ConsolePass = true;
 //}
 
- Test7();
+Test7_1();
 } 
 
 
@@ -272,6 +272,24 @@ void Test4() // Buzzer Test
     RGB_color(0, 0, 255); // Blue
    
   }
+}
+  void Test44() // Buzzer Test
+{
+    
+     RGB_color(0, 255, 0); // Yellow
+  
+  
+ delay(2000);
+   Serial.println("Im in High");
+   digitalWrite(BUZZER_PIN, LOW);
+  RGB_color(255, 255, 0); // Yellow
+  
+ delay(2000);
+    Serial.println("Im in Low");
+    digitalWrite(BUZZER_PIN, HIGH);
+    RGB_color(0, 0, 255); // Blue
+   
+ 
   
 }
 
@@ -410,7 +428,7 @@ void receive_message()
    }
 
 
-void Test7() //Siren Transmitter Test
+void Test7() //Siren Transmitter Test 
 {
  bool State = digitalRead(BUTTON_PIN);
    RGB_color(0, 0, 255); // Blue
@@ -418,15 +436,33 @@ void Test7() //Siren Transmitter Test
   if(State == LOW)
   {
     digitalWrite(SIREN_PIN, LOW);
-//    digitalWrite(RF_ENABLE_PIN, LOW);
+    digitalWrite(RF_ENABLE_PIN, HIGH);
     RGB_color(0, 255, 255); // Blue
   }
 
     if(State == HIGH)
   {
     digitalWrite(SIREN_PIN, HIGH);
-//    digitalWrite(RF_ENABLE_PIN, LOW);
+    digitalWrite(RF_ENABLE_PIN, HIGH);
     RGB_color(255, 255, 0); // Blue
   }
 }
+
+
+  void Test7_1() //Siren Transmitter Test 
+{
+ 
+   RGB_color(0, 0, 255); // Blue
+
   
+    digitalWrite(SIREN_PIN, LOW);
+    digitalWrite(RF_ENABLE_PIN, HIGH);
+    RGB_color(0, 255, 255); // Blue
+delay (200);
+    digitalWrite(SIREN_PIN, HIGH);
+    digitalWrite(RF_ENABLE_PIN, HIGH);
+    RGB_color(255, 255, 0); // Blue
+
+    delay (200);
+ 
+}
