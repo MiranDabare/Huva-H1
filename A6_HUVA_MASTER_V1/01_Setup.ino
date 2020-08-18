@@ -24,28 +24,28 @@ void setup(){
   digitalWrite(RF_ENABLE_PIN, HIGH);
   digitalWrite(REMOTE_GND_PIN, HIGH);
 
- delay(10000); //Let the GSM module connect
+// delay(10000); //Let the GSM module connect
 
-  digitalWrite(GSM_PIN, HIGH);
+//  digitalWrite(GSM_PIN, HIGH);
  
   Serial.begin(9600); // baudrate for serial monitor
-  SIM900.begin(9600); // baudrate for GSM shield
+//  SIM900.begin(9600); // baudrate for GSM shield
 
-   SIM900.print("AT+CUSD=0\r"); 
-  delay(100);
+//   SIM900.print("AT+CUSD=0\r"); 
+//  delay(100);
 
 
    // set SMS mode to text mode
-  SIM900.print("AT+CMGF=1\r");  
-  delay(100);
+//  SIM900.print("AT+CMGF=1\r");  
+//  delay(100);
   
   // set gsm module to tp show the output on serial out
-  SIM900.print("AT+CNMI=2,2,0,0,0\r"); 
-  delay(100);
+//  SIM900.print("AT+CNMI=2,2,0,0,0\r"); 
+//  delay(100);
 
  
-  SIM900.println("AT+CMGD=1,4\r");  
-  delay(5000);
+//  SIM900.println("AT+CMGD=1,4\r");  
+//  delay(5000);
 
   Serial.println("gprs initialize done!");
     Serial.println("start to send message ...");

@@ -82,7 +82,10 @@ String AlertBeeper = "OFF";
 bool GSMPass = false;
 bool ConsolePass = false;
 
+bool TriggerArmed =  false;
 
+int PressTime = 0;
+int Clock = 0;
 
  void(* resetFunc) (void) = 0;
  

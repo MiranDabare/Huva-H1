@@ -1,3 +1,5 @@
+bool WTF = false;
+
 void CheckButton()
 {
  delay(50);
@@ -22,46 +24,121 @@ void CheckButton()
   } else if (!Pressed)
   {
     Pressed = true;
-    float Clock = millis();
+    Clock = millis();
+    
     while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
     {
-      float PressTime = millis() - Clock ; 
+      Serial.println("While here");
+      PressTime = millis() - Clock ; 
+      TriggerArmed = false ;
       delay(50);
+      
       if (PressTime > 2000)
       {
         Beeper(); //Turn on the LED to let the user know alert has been set
         Serial.println("Button Pressed");
+        TriggerArmed =  true;
         delay(2000); // Delay to let go of the button
-
-// =========== FALSE ALARM ===============\\
-
-         PressTime = millis() - Clock ;
+      }
+        
+        while (PressTime < 20000 && TriggerArmed == true)
+        {
+          False_Alarm();
+          
+           if (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
+           {
+            Serial.println("False Alarm");
+            delay(100);
+            TriggerArmed = false ;
+            WTF = true;
             
-//       SendSMS = "ALERT! DEVICE ID: " + DeviceID ;
+            PressTime = 0;
+            break;   
+            }
+            
 
-          SendSMS = UserMessage1;
-         
-          wait = true;
-          SIM900.println("AT+CMGD=1,4\r");  
-          delay(3000);
-          
-          wait = true;
-          send_message(SendSMS); 
-          Serial.println("SMS Sent");
-          delay(3000);
-          receive_message();
-          
-          wait = true;
-          send_message_demo2(DemoMessage2);   
-       
-          Serial.println("SMS Sent1");
-          delay(3000);
-          receive_message();
+        } 
 
-          Serial.println("SMS Sent2");
-          delay(3000);
-          Alert();
+        if (WTF == true)
+        {
+          WTF = false;
+          break;
+        }
+
+        
+               
+
+          if (PressTime > 20000)
+          {
+            break;
           }
+        }
+                  
+// ===========  ALARM TRIGGERING ===============\\ 
+
+           if (TriggerArmed == true && PressTime > 20000)
+           {
+             Serial.println("Triggering Sent");
+
+              SendSMS = UserMessage1;
+             
+              wait = true;
+//              SIM900.println("AT+CMGD=1,4\r");  
+              delay(3000);
+              
+              wait = true;
+//              send_message(SendSMS); 
+              Serial.println("SMS Sent");
+              delay(3000);
+//              receive_message();
+              
+              wait = true;
+//              send_message_demo2(DemoMessage2);   
+           
+              Serial.println("SMS Sent1");
+              delay(3000);
+//              receive_message();
+    
+              Serial.println("SMS Sent2");
+              delay(3000);
+//              Alert();
+
+              TriggerArmed = false;
+              }
+      
+      }
      }  
-   }
+   
+
+
+void False_Alarm()
+{
+  // =========== FALSE ALARM ===============\\
+      
+        Serial.println("Waiting");
+
+         PressTime = (millis() - Clock - 2000) ;
+
+//         if ((PressTime % 1) == 0)
+//         {
+//          RGB_LED("RED");
+//          delay(200);
+//         }
+//
+//         if ((PressTime % 1) == 1)
+//         {
+//          RGB_LED("BLUE");
+//          delay(200);
+//         }
+
+
+          RGB_LED("RED");
+          delay(200);
+        
+        
+          RGB_LED("BLUE");
+          delay(200);
+     
+      
+     Serial.println(PressTime);
 }
