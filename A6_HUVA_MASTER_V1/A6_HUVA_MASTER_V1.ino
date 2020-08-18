@@ -291,8 +291,13 @@ void CheckButton()
  delay(50);
   Serial.println("Im here");
 
+  if (digitalRead(REMOTE_D2_PIN) == HIGH)
+  {
+    Beeper();
+  }
+
      if (digitalRead(BUTTON_PIN) == HIGH && digitalRead(REMOTE_D0_PIN) == LOW) 
-//if (digitalRead(REMOTE_D3_PIN) == LOW) 
+
      { // the door is closed
       Pressed = false;
      } else if (!Pressed) 
@@ -301,11 +306,11 @@ void CheckButton()
         
         float Clock = millis();
         
-//        while (digitalRead(REMOTE_D3_PIN) == HIGH)
+
         while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
         {
           float PressTime = millis() - Clock ; 
-Serial.println("rEGIS");
+
                    
           delay(50);
           
@@ -344,7 +349,7 @@ Serial.println("rEGIS");
 
               delay(3000);
                 Alert();
-    }
+                }
           }  
         }
 }
