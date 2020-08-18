@@ -39,7 +39,12 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define LED_GREEN_PIN 5
 #define LED_BLUE_PIN  6
 
-#define REMOTE_PIN  7
+#define REMOTE_D0_PIN  7
+#define REMOTE_GND_PIN  14
+#define REMOTE_D1_PIN  15
+#define REMOTE_D2_PIN  16
+#define REMOTE_D3_PIN  17
+
 #define SIREN_PIN  8
 #define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
@@ -91,7 +96,13 @@ bool ConsolePass = false;
 void setup(){
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);
-  pinMode(REMOTE_PIN, INPUT);
+  pinMode(REMOTE_D0_PIN, INPUT);
+  pinMode(REMOTE_D1_PIN, INPUT);
+  pinMode(REMOTE_D2_PIN, INPUT);
+  pinMode(REMOTE_D3_PIN, INPUT);
+  pinMode(REMOTE_GND_PIN, OUTPUT);
+  
+  digitalWrite(REMOTE_GND_PIN, HIGH);
 
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(GSM_PIN, OUTPUT);
@@ -175,7 +186,7 @@ void loop()
 //ConsolePass = true;
 //}
 
-Test7_1();
+Test3();
 } 
 
 
@@ -232,21 +243,64 @@ void Test2() // Button Testing
 
 void Test3()// Remote Recieve test
 {
-  bool State = digitalRead(REMOTE_PIN);
+  
+  bool StateD0 = digitalRead(REMOTE_D0_PIN);
+  bool StateD1 = digitalRead(REMOTE_D1_PIN);
+  bool StateD2 = digitalRead(REMOTE_D2_PIN);
+  bool StateD3 = digitalRead(REMOTE_D3_PIN);
 
-    if(State == HIGH)
+  digitalWrite(REMOTE_GND_PIN, HIGH);
+
+  Serial.print(digitalRead(REMOTE_D0_PIN)); Serial.print(" ");
+  Serial.print(digitalRead(REMOTE_D1_PIN));Serial.print(" ");
+  Serial.print(digitalRead(REMOTE_D2_PIN));Serial.print(" ");
+  Serial.println(digitalRead(REMOTE_D3_PIN));
+  
+  RGB_color(0, 0, 0); // Blue
+
+    if(StateD0 == HIGH)
   {
  
-   Serial.println("Im in High");
+//   Serial.println("D0 in High");
+   RGB_color(255, 0, 0); // Blue
+  
+  } 
+   if(StateD1 == HIGH)
+  {
+ 
+//   Serial.println("D1 in High");
+   RGB_color(0, 255, 0); // Blue
+  
+  }
+   if(StateD2== HIGH)
+  {
+ 
+//   Serial.println("D2 in High");
    RGB_color(0, 0, 255); // Blue
   
   }
-  
-  if(State == LOW)
+   if(StateD3 == HIGH)
   {
-    Serial.println("Im in Low");
-    RGB_color(255, 255, 0); // Blue
+ 
+//   Serial.println("D3 in High");
+   RGB_color(255, 255, 0); // Blue
+  
   }
+  
+  else
+  {
+//    Serial.println("Im in Low");
+    RGB_color(0, 255, 255); // Blue
+  }
+
+  while (digitalRead(BUTTON_PIN) == LOW)
+  {
+    digitalWrite(REMOTE_GND_PIN, LOW);
+    Serial.println("RF OFF");
+    RGB_color(125, 125, 125); // Blue
+  }
+  
+
 
   
 }
