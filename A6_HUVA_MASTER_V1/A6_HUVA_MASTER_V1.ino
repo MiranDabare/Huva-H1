@@ -30,7 +30,7 @@
   */
 #include <SoftwareSerial.h> // Library for using serial communication
 SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial pins
-
+//
 
 #define BUZZER_PIN  9
 #define GSM_PIN     4
@@ -39,6 +39,10 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define LED_RED_PIN 3
 #define LED_GREEN_PIN 5
 #define LED_BLUE_PIN  6
+
+#define REMOTE_PIN  7
+#define SIREN_PIN  8
+#define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
 String incomingData = "";   // for storing incoming serial data
 String message = "";   // A String for storing the message
@@ -51,11 +55,13 @@ String ServerNumber2 = "+94778755176";
 
 String DemoNumber2  = "+94764035418";
 String DemoNumber1  = "+94774701366";
+String TestNumber  = "+94774061725";
 
 String DemoMessage1 = "SEC12345 TRIGGER SILENT";
 String DemoMessage2 = "SEC12345 TRIGGER LOUD";
 String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
 String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
+String TestMessage = "This module is working fine :)";
 
 String SecurityKey = "SEC12345";
 
@@ -66,6 +72,10 @@ bool Pressed = false;
 String BeeperOn = "OFF";
 String AlertBeeper = "OFF";
  bool wait = true;
+ bool Pass = false;
+bool GSMPass = false;
+bool ConsolePass = false;
+
 
 // //============ RGB LED COLOUR GOVERNING CODE ===============\\
 //void RGB_color(int red_light_value, int green_light_value, int blue_light_value){
@@ -83,19 +93,23 @@ String AlertBeeper = "OFF";
 void setup(){
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(REMOTE_PIN, INPUT);
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(GSM_PIN, OUTPUT);
+  pinMode(RF_ENABLE_PIN, OUTPUT);
 
-    pinMode(LED_RED_PIN, OUTPUT);
+  pinMode(LED_RED_PIN, OUTPUT);
   pinMode(LED_GREEN_PIN, OUTPUT);
   pinMode(LED_BLUE_PIN, OUTPUT);
 
   digitalWrite(BUZZER_PIN, LOW);
-    digitalWrite(GSM_PIN, LOW);
+  digitalWrite(GSM_PIN, LOW);
+  digitalWrite(SIREN_PIN, LOW);
+  digitalWrite(RF_ENABLE_PIN, HIGH);
 
  delay(10000); //Let the GSM module connect
 
-    digitalWrite(GSM_PIN, HIGH);
+  digitalWrite(GSM_PIN, HIGH);
  
   Serial.begin(9600); // baudrate for serial monitor
   SIM900.begin(9600); // baudrate for GSM shield
