@@ -291,10 +291,19 @@ void CheckButton()
  delay(50);
   Serial.println("Im here");
 
+// CONSOLE CHECK
   if (digitalRead(REMOTE_D2_PIN) == HIGH)
   {
     Beeper();
   }
+
+  // SIREN CHECK
+  if (digitalRead(REMOTE_D3_PIN) == HIGH)
+  {
+    Siren_Check();
+  }
+
+  
 
      if (digitalRead(BUTTON_PIN) == HIGH && digitalRead(REMOTE_D0_PIN) == LOW) 
 
@@ -541,6 +550,24 @@ void receive_message()
     delay(10); 
 
     }
-     
-  
+}
+
+void Siren_Check() //Siren Transmitter Test 
+{
+
+   RGB_color(0, 0, 255); // Blue
+
+  for (int f = 0; f <= 5; f++)
+  { 
+    digitalWrite(SIREN_PIN, LOW);
+    digitalWrite(RF_ENABLE_PIN, HIGH);
+    RGB_color(0, 255, 255); // Blue
+  delay(500);
+
+   
+    digitalWrite(SIREN_PIN, HIGH);
+    digitalWrite(RF_ENABLE_PIN, HIGH);
+    RGB_color(255, 255, 0); // Blue
+     delay(500);
+  }
 }
