@@ -39,11 +39,11 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define LED_GREEN_PIN 5
 #define LED_BLUE_PIN  6
 
-#define REMOTE_D0_PIN  7
 #define REMOTE_GND_PIN  14
-#define REMOTE_D1_PIN  15
-#define REMOTE_D2_PIN  16
-#define REMOTE_D3_PIN  17
+#define REMOTE_D0_PIN  7 // D
+#define REMOTE_D1_PIN  15 // C
+#define REMOTE_D2_PIN  16 // B
+#define REMOTE_D3_PIN  17 // A
 
 #define SIREN_PIN  8
 #define RF_ENABLE_PIN  12 //Pull this down before transmitting
@@ -186,7 +186,7 @@ void loop()
 //ConsolePass = true;
 //}
 
-Test3();
+Test1();
 } 
 
 
@@ -201,24 +201,88 @@ void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
 
 void Test1()
 {
-  RGB_color(0, 0, 255); // Blue
-  delay(2000);
-  RGB_color(0, 255, 0); // Green
-  delay(2000);
-  RGB_color(255, 0, 0); // Red
-  delay(2000);
-    RGB_color(255, 255, 125); // Raspberry
-  delay(2000);
-  RGB_color(0, 255, 255); // Cyan
-  delay(2000);
-  RGB_color(255, 0, 255); // Magenta
-  delay(2000);
-  RGB_color(255, 255, 0); // Yellow
-  delay(2000);
-  RGB_color(255, 255, 255); // White
-  delay(2000);
-  RGB_color(0, 0, 0); // Off
-  delay(2000);
+//  RGB_color(0, 0, 0); // WHITE
+//    delay(2000);
+//  RGB_color(0, 0, 255); // YELLOW
+//  delay(2000);
+//  RGB_color(0, 255, 0); // PINK
+//  delay(2000);
+//  RGB_color(255, 0, 0); // CYAN
+//  delay(2000);
+//    RGB_color(255, 255, 0); // BLUE
+//  delay(2000);
+//  RGB_color(0, 255, 255); // RED
+//  delay(2000);
+//  RGB_color(255, 0, 255); // GREEN
+//  delay(2000);
+//
+//  RGB_color(255, 255, 255); // OFF
+//  delay(2000);
+
+RGB_LED("WHITE");
+delay(2000);
+RGB_LED("YELLOW");
+delay(2000);
+RGB_LED("PINK");
+delay(2000);
+RGB_LED("CYAN");
+delay(2000);
+RGB_LED("BLUE");
+delay(2000);
+RGB_LED("RED");
+delay(2000);
+RGB_LED("RED");
+delay(2000);
+RGB_LED("GREEN");
+delay(2000);
+RGB_LED("OFF");
+delay(2000);
+ 
+}
+
+void RGB_LED(String LEDColour)
+{
+  if (LEDColour == "WHITE")
+  {
+    RGB_color(0, 0, 0); 
+  }
+
+  if (LEDColour == "YELLOW")
+  {
+    RGB_color(0, 0, 255); 
+  }
+
+  if (LEDColour == "PINK")
+  {
+    RGB_color(0, 255, 0); 
+  }
+
+  if (LEDColour == "CYAN")
+  {
+    RGB_color(255, 0, 0); 
+  }
+
+  if (LEDColour == "BLUE")
+  {
+    RGB_color(255, 255, 0);
+  }
+
+  if (LEDColour == "RED")
+  {
+    RGB_color(0, 255, 255); 
+  }
+
+  if (LEDColour == "GREEN")
+  {
+    RGB_color(255, 0, 255); 
+  }
+
+  if (LEDColour == "OFF")
+  {
+    RGB_color(255, 255, 255); 
+  }
+
+  
 }
 
 void Test2() // Button Testing
