@@ -6,7 +6,6 @@
 //  PROGRAMMER    : MIRAN DABARE
 ///////////////////////////////////////////////////////////////////////////////////////
 
-//WTF
 
 /////////////////////////////////   NOTES   /////////////////////////////////////////////
 // * THIS CODE USES THE SIM900A MINI GSM MODULE WITH THE SIM900 GPRS LIBRARY
@@ -40,7 +39,12 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define LED_GREEN_PIN 5
 #define LED_BLUE_PIN  6
 
-#define REMOTE_PIN  7
+#define REMOTE_D3_PIN  7
+#define REMOTE_GND_PIN  14
+#define REMOTE_D1_PIN  16
+#define REMOTE_D2_PIN  15
+#define REMOTE_D0_PIN  17
+
 #define SIREN_PIN  8
 #define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
@@ -93,7 +97,13 @@ bool ConsolePass = false;
 void setup(){
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);
-  pinMode(REMOTE_PIN, INPUT);
+  
+  pinMode(REMOTE_D0_PIN, INPUT);
+  pinMode(REMOTE_D1_PIN, INPUT);
+  pinMode(REMOTE_D2_PIN, INPUT);
+  pinMode(REMOTE_D3_PIN, INPUT);
+  pinMode(REMOTE_GND_PIN, OUTPUT);
+  
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(GSM_PIN, OUTPUT);
   pinMode(RF_ENABLE_PIN, OUTPUT);
@@ -106,33 +116,34 @@ void setup(){
   digitalWrite(GSM_PIN, LOW);
   digitalWrite(SIREN_PIN, LOW);
   digitalWrite(RF_ENABLE_PIN, HIGH);
+  digitalWrite(REMOTE_GND_PIN, HIGH);
 
- delay(10000); //Let the GSM module connect
+// delay(10000); //Let the GSM module connect
 
-  digitalWrite(GSM_PIN, HIGH);
+//  digitalWrite(GSM_PIN, HIGH);
  
   Serial.begin(9600); // baudrate for serial monitor
-  SIM900.begin(9600); // baudrate for GSM shield
-
-   SIM900.print("AT+CUSD=0\r"); 
-  delay(100);
-
-
-   // set SMS mode to text mode
-  SIM900.print("AT+CMGF=1\r");  
-  delay(100);
-  
-  // set gsm module to tp show the output on serial out
-  SIM900.print("AT+CNMI=2,2,0,0,0\r"); 
-  delay(100);
-
- 
-  SIM900.println("AT+CMGD=1,4\r");  
-  delay(5000);
-
-  Serial.println("gprs initialize done!");
-    Serial.println("start to send message ...");
-//    RGB_color(0, 0, 255); // Blue
+//  SIM900.begin(9600); // baudrate for GSM shield
+//
+//   SIM900.print("AT+CUSD=0\r"); 
+//  delay(100);
+//
+//
+//   // set SMS mode to text mode
+//  SIM900.print("AT+CMGF=1\r");  
+//  delay(100);
+//  
+//  // set gsm module to tp show the output on serial out
+//  SIM900.print("AT+CNMI=2,2,0,0,0\r"); 
+//  delay(100);
+//
+// 
+//  SIM900.println("AT+CMGD=1,4\r");  
+//  delay(5000);
+//
+//  Serial.println("gprs initialize done!");
+//    Serial.println("start to send message ...");
+    RGB_color(0, 0, 255); // Blue
     
 }
     
@@ -265,15 +276,23 @@ if(incomingData.indexOf(SecurityKey)>=0)
        
 } 
 
+void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
+{
+  analogWrite(LED_RED_PIN, red_light_value);
+  analogWrite(LED_GREEN_PIN, green_light_value);
+  analogWrite(LED_BLUE_PIN, blue_light_value);
+}
+
 
 /////////////////////////////////   SENDING CODE   /////////////////////////////////////////////
 
 void CheckButton()
 {
  delay(50);
-//  Serial.println("Im here");
+  Serial.println("Im here");
 
-     if (digitalRead(BUTTON_PIN) == HIGH) 
+     if (digitalRead(BUTTON_PIN) == HIGH && digitalRead(REMOTE_D0_PIN) == LOW) 
+//if (digitalRead(REMOTE_D3_PIN) == LOW) 
      { // the door is closed
       Pressed = false;
      } else if (!Pressed) 
@@ -282,10 +301,11 @@ void CheckButton()
         
         float Clock = millis();
         
-        while (digitalRead(BUTTON_PIN) == LOW)
+//        while (digitalRead(REMOTE_D3_PIN) == HIGH)
+        while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
         {
           float PressTime = millis() - Clock ; 
-
+Serial.println("rEGIS");
                    
           delay(50);
           
@@ -297,7 +317,7 @@ void CheckButton()
             delay(2000); // Delay to let go of the button
 //            SendSMS = "ALERT! DEVICE ID: " + DeviceID ;
 
-              SendSMS = UserMessage1;
+//              SendSMS = UserMessage1;
             
            
            // Send a sms back to confirm that the relay is turned on
@@ -307,17 +327,17 @@ void CheckButton()
 //           delay(3000);
 
   wait = true;
-          send_message(SendSMS); 
+//          send_message(SendSMS); 
           Serial.println("SMS Sent");
           delay(3000);
           receive_message();
           
           wait = true;
-        send_message_demo2(DemoMessage2);   
+//        send_message_demo2(DemoMessage2);   
        
           Serial.println("SMS Sent1");
           delay(3000);
-          receive_message();
+//          receive_message();
 
           Serial.println("SMS Sent2");
  
@@ -349,9 +369,9 @@ void Alert(){
  
         
   
-//   RGB_color(255, 0, 0); // Red
+   RGB_color(255, 0, 0); // Red
     delay(50);
-//   RGB_color(0, 0, 0); // Off
+   RGB_color(0, 0, 0); // Off
     delay(50);
     
       Timer++;
@@ -368,9 +388,9 @@ void Alert(){
             if (AlertBeeper == "OFF")
         {
   
-//    RGB_color(255, 0, 0); // Red
+    RGB_color(255, 0, 0); // Red
     delay(500);
-//   RGB_color(0, 0, 0); // Off
+   RGB_color(0, 0, 0); // Off
     delay(500);
     
       Timer++;
@@ -385,7 +405,7 @@ void Alert(){
     }
 
     
-//    RGB_color(0, 0, 0); // Off
+    RGB_color(0, 0, 0); // Off
     
  
   resetFunc();
@@ -413,15 +433,15 @@ void Beeper()
       while (Counter < 10)
   {
       digitalWrite(BUZZER_PIN, HIGH);
-//     RGB_color(0, 255, 0); // Green
+     RGB_color(0, 255, 0); // Green
       delay(50);
       digitalWrite(BUZZER_PIN, LOW);
-//      RGB_color(0, 0, 0); // Off
+      RGB_color(0, 0, 0); // Off
       delay(50);  
 
         Counter++;
   }
-//  RGB_color(0, 255, 0); // Green
+  RGB_color(0, 255, 0); // Green
   }
 
 
@@ -430,15 +450,15 @@ void Beeper()
       while (Counter < 10)
   {
       
-//       RGB_color(0, 255, 0); // Green
+       RGB_color(0, 255, 0); // Green
       delay(50);
       
-//      RGB_color(0, 0, 0); // Off
+      RGB_color(0, 0, 0); // Off
       delay(50);  
 
         Counter++;
   }
-//     RGB_color(0, 255, 0); // Green
+     RGB_color(0, 255, 0); // Green
   }
   
 }

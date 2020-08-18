@@ -244,10 +244,10 @@ void Test2() // Button Testing
 void Test3()// Remote Recieve test
 {
   
-  bool StateD0 = digitalRead(REMOTE_D0_PIN);
-  bool StateD1 = digitalRead(REMOTE_D1_PIN);
-  bool StateD2 = digitalRead(REMOTE_D2_PIN);
-  bool StateD3 = digitalRead(REMOTE_D3_PIN);
+  bool StateD0 = digitalRead(REMOTE_D0_PIN); // MAIN TRIGGER
+  bool StateD1 = digitalRead(REMOTE_D1_PIN); // CONSOLE CHECK
+  bool StateD2 = digitalRead(REMOTE_D2_PIN); // SIREN CHECK
+  bool StateD3 = digitalRead(REMOTE_D3_PIN); // NC
 
   digitalWrite(REMOTE_GND_PIN, HIGH);
 
