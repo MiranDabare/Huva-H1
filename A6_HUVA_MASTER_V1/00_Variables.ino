@@ -85,6 +85,7 @@ bool GSMPass = false;
 bool ConsolePass = false;
 
 bool TriggerArmed =  false;
+bool Activate_Alarm =  false;
 
 int PressTime = 0;
 int Clock = 0;
