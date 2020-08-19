@@ -25,56 +25,37 @@ void CheckButton()
   {
     Pressed = true;
     Clock = millis();
+    TriggerArmed = false ;
+
+    Button_Timer();
     
-    while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
-    {
-      Serial.println("While here");
-      PressTime = millis() - Clock ; 
-      TriggerArmed = false ;
-      delay(50);
+
       
-      if (PressTime > 2000)
+      if (PressTime > 2000 && PressTime < 8000)
       {
+        PressTime = 0;
         Beeper(); //Turn on the LED to let the user know alert has been set
         Serial.println("Button Pressed");
         TriggerArmed =  true;
         delay(2000); // Delay to let go of the button
-        Sleep();
+        Clock2 = millis();
+        Alarm_Buffer();
       }
-        
-        while (PressTime < 20000 && TriggerArmed == true)
-        {
-          False_Alarm();
-          Clock2 = millis();
-           while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
-           {
-              int PressTime2 = millis() - Clock2 ;
-              Serial.println("False Alarm");
-              Serial.println(PressTime2);
-              delay(100);
 
-            if (PressTime2 > 2000)
-            {
-              Serial.println("Alarm Canceled");
-              TriggerArmed = false ;
-              WTF = true;
-              PressTime = 0;
-              break;                 
-            }          
-            }
-        } 
+       if (PressTime > 10000 && PressTime < 12000)
+      {
+       Sleep();
+      }
+    
+}
+}
+     
+  
+   
 
-        if (WTF == true)
-        {
-          WTF = false;
-          break;
-        }
-            
- 
-// ===========  ALARM TRIGGERING ===============\\ 
 
-           if (TriggerArmed == true && PressTime > 20000)
-           {
+void Alarm_Triggering()
+{
              Serial.println("Triggering Sent");
 
               SendSMS = UserMessage1;
@@ -101,28 +82,76 @@ void CheckButton()
 //              Alert();
 
               TriggerArmed = false;
-              }
-      
-      }
-     }
-}  
-   
+}
 
-
-void False_Alarm()
+void Button_Timer()
 {
-  // =========== FALSE ALARM ===============\\
+  Clock = millis();
+      while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
+    {
+      Serial.println(PressTime);
+      PressTime = millis() - Clock ; 
+      delay(50);
+
+      if(PressTime > 2000 && PressTime < 8000)
+      {
+        RGB_LED("YELLOW");
+        digitalWrite(BUZZER_PIN, HIGH);        
+      }
       
-        Serial.println("Waiting");
+      digitalWrite(BUZZER_PIN, LOW);
 
-         PressTime = (millis() - Clock - 2000) ;
+      if(PressTime > 10000 && PressTime < 12000)
+      {
+        RGB_LED("OFF");
+      }
 
-          RGB_LED("RED");
-          delay(200);
+      if(PressTime < 2000 && TriggerArmed ==  true)
+      {
+         RGB_LED("RED");
+         delay(200);
         
-          RGB_LED("BLUE");
-          delay(200);
+         RGB_LED("BLUE");
+         delay(200);
+      }
+
+    }
+}
+
+void Alarm_Buffer()
+{
+  while(TriggerArmed ==  true)
+  {
+    Button_Timer();
+
+    Serial.println("Waiting");
+    int PressTime2 = (millis() - Clock2) ;
+
+    RGB_LED("RED");
+    delay(200);
+  
+    RGB_LED("BLUE");
+    delay(200);
      
-      
-     Serial.println(PressTime);
+    Serial.println(PressTime2);
+
+    if(PressTime > 2000 && PressTime < 3000)
+    {
+      Serial.println("False Alarm");
+      TriggerArmed = false;
+      break;
+    }
+
+    if(PressTime2 > 10000)
+    {
+      Serial.println("Activate Alarm");
+      RGB_LED("GREEN");
+      Activate_Alarm = true;
+      TriggerArmed = false;
+      Alarm_Triggering();
+      break;
+    }
+
+    
+  }
 }
