@@ -24,6 +24,8 @@ void setup(){
   digitalWrite(RF_ENABLE_PIN, HIGH);
   digitalWrite(REMOTE_GND_PIN, HIGH);
 
+  RGB_LED("GREEN");
+
 // delay(10000); //Let the GSM module connect
 
 //  digitalWrite(GSM_PIN, HIGH);
@@ -49,7 +51,7 @@ void setup(){
 
   Serial.println("gprs initialize done!");
     Serial.println("start to send message ...");
-    RGB_color(0, 0, 255); // Blue
+    RGB_LED("BLUE");
     
 }
     

@@ -16,9 +16,9 @@ void Alert(){
  
         
   
-   RGB_color(255, 0, 0); // Red
+   RGB_LED("RED");
     delay(50);
-   RGB_color(0, 0, 0); // Off
+  RGB_LED("BLUE");
     delay(50);
     
       Timer++;
@@ -35,9 +35,9 @@ void Alert(){
             if (AlertBeeper == "OFF")
         {
   
-    RGB_color(255, 0, 0); // Red
+    RGB_LED("RED");
     delay(500);
-   RGB_color(0, 0, 0); // Off
+   RGB_LED("BLUE");
     delay(500);
     
       Timer++;
@@ -52,7 +52,7 @@ void Alert(){
     }
 
     
-    RGB_color(0, 0, 0); // Off
+    RGB_LED("OFF");
     
  
   resetFunc();

@@ -8,10 +8,10 @@ void Beeper()
       while (Counter < 10)
   {
       digitalWrite(BUZZER_PIN, HIGH);
-     RGB_color(0, 255, 0); // Green
+     RGB_LED("YELLOW");
       delay(50);
       digitalWrite(BUZZER_PIN, LOW);
-      RGB_color(0, 0, 0); // Off
+      RGB_LED("RED");
       delay(50);  
 
         Counter++;
@@ -25,15 +25,15 @@ void Beeper()
       while (Counter < 10)
   {
       
-       RGB_color(0, 255, 0); // Green
+       RGB_LED("YELLOW");
       delay(50);
       
-      RGB_color(0, 0, 0); // Off
+      RGB_LED("RED");
       delay(50);  
 
         Counter++;
   }
-     RGB_color(0, 255, 0); // Green
+     RGB_LED("BLUE");
   }
   
 }
