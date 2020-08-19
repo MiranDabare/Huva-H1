@@ -2,8 +2,8 @@ bool WTF = false;
 
 void CheckButton()
 {
- delay(50);
-  Serial.println("Im here");
+// delay(50);
+//  Serial.println("Im here");
 
 // CONSOLE CHECK
   if (digitalRead(REMOTE_D2_PIN) == HIGH)
@@ -56,30 +56,29 @@ void CheckButton()
 
 void Alarm_Triggering()
 {
-             Serial.println("Triggering Sent");
+//             Serial.println("Triggering Sent");
 
-              SendSMS = UserMessage1;
+//              SendSMS = UserMessage1;
              
-              wait = true;
+//              wait = true;
 //              SIM900.println("AT+CMGD=1,4\r");  
               delay(3000);
               
               wait = true;
-//              send_message(SendSMS); 
+              send_message(UserMessage1); 
               Serial.println("SMS Sent");
               delay(3000);
-//              receive_message();
+              receive_message();
               
               wait = true;
-//              send_message_demo2(DemoMessage2);   
+              send_message_demo2(DemoMessage2);   
            
               Serial.println("SMS Sent1");
               delay(3000);
-//              receive_message();
+              receive_message();
     
-              Serial.println("SMS Sent2");
-              delay(3000);
-//              Alert();
+          
+              Alert();
 
               TriggerArmed = false;
 }
@@ -89,7 +88,7 @@ void Button_Timer()
   Clock = millis();
       while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
     {
-      Serial.println(PressTime);
+//      Serial.println(PressTime);
       PressTime = millis() - Clock ; 
       delay(50);
 
@@ -124,7 +123,7 @@ void Alarm_Buffer()
   {
     Button_Timer();
 
-    Serial.println("Waiting");
+//    Serial.println("Waiting");
     int PressTime2 = (millis() - Clock2) ;
 
     RGB_LED("RED");
@@ -133,18 +132,18 @@ void Alarm_Buffer()
     RGB_LED("BLUE");
     delay(200);
      
-    Serial.println(PressTime2);
+//    Serial.println(PressTime2);
 
     if(PressTime > 2000 && PressTime < 3000)
     {
-      Serial.println("False Alarm");
+//      Serial.println("False Alarm");
       TriggerArmed = false;
       break;
     }
 
     if(PressTime2 > 10000)
     {
-      Serial.println("Activate Alarm");
+//      Serial.println("Activate Alarm");
       RGB_LED("GREEN");
       Activate_Alarm = true;
       TriggerArmed = false;

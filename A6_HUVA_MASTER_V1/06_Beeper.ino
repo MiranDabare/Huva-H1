@@ -16,7 +16,7 @@ void Beeper()
 
         Counter++;
   }
-  RGB_color(0, 255, 0); // Green
+ RGB_LED("BLUE");
   }
 
 

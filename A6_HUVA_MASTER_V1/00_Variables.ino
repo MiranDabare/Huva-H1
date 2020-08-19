@@ -55,20 +55,20 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 String incomingData = "";   // for storing incoming serial data
 String message = "";   // A String for storing the message
 String SendSMS = "";
-String DeviceBatchID = "BAT12345" ; 
+//String DeviceBatchID = "BAT12345" ; 
 String DeviceID = "HMD1";
 
 String ServerNumber = "+94774061725";
-String ServerNumber2 = "+94778755176";
+//String ServerNumber2 = "+94778755176";
 
 String DemoNumber2  = "+94764035418";
-String DemoNumber1  = "+94774701366";
+//String DemoNumber1  = "+94774701366";
 String TestNumber  = "+94774061725";
 
-String DemoMessage1 = "SEC12345 TRIGGER SILENT";
+//String DemoMessage1 = "SEC12345 TRIGGER SILENT";
 String DemoMessage2 = "SEC12345 TRIGGER LOUD";
 String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
-String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
+//String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
 String TestMessage = "This module is working fine :)";
 
 String SecurityKey = "SEC12345";
