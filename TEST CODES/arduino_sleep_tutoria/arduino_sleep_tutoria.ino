@@ -34,6 +34,11 @@ void Going_To_Sleep(){
     sleep_cpu();//activating sleep mode
     Serial.println("just woke up!");//next line of code executed after the interrupt 
     digitalWrite(LED_BUILTIN,HIGH);//turning LED on
+
+    while(digitalRead(2) == LOW)
+    {
+      digitalWrite(LED_BUILTIN, HIGH);
+    }
   }
 
 void wakeUp(){

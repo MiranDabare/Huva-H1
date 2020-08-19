@@ -29,6 +29,7 @@
   RGB_color(255, 255, 255); // OFF
   
   */
+#include <avr/sleep.h>
 #include <SoftwareSerial.h> // Library for using serial communication
 SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial pins
 //
@@ -36,6 +37,7 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define BUZZER_PIN  9
 #define GSM_PIN     4
 #define BUTTON_PIN  2
+
 
 #define LED_RED_PIN 3
 #define LED_GREEN_PIN 5

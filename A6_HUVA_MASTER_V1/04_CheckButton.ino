@@ -39,6 +39,7 @@ void CheckButton()
         Serial.println("Button Pressed");
         TriggerArmed =  true;
         delay(2000); // Delay to let go of the button
+        Sleep();
       }
         
         while (PressTime < 20000 && TriggerArmed == true)
@@ -63,11 +64,11 @@ void CheckButton()
             }
         } 
 
-            if (WTF == true)
-            {
-              WTF = false;
-              break;
-            }
+        if (WTF == true)
+        {
+          WTF = false;
+          break;
+        }
             
  
 // ===========  ALARM TRIGGERING ===============\\ 
