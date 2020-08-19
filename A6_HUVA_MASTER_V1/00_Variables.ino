@@ -75,7 +75,7 @@ String SecurityKey = "SEC12345";
 
 
 bool Pressed = false;
-String BeeperOn = "OFF";
+String BeeperOn = "ON";
 String AlertBeeper = "OFF";
  bool wait = true;
  bool Pass = false;
@@ -86,6 +86,7 @@ bool TriggerArmed =  false;
 
 int PressTime = 0;
 int Clock = 0;
+int Clock2 = 0;
 
  void(* resetFunc) (void) = 0;
  

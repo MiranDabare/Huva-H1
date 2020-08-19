@@ -44,36 +44,32 @@ void CheckButton()
         while (PressTime < 20000 && TriggerArmed == true)
         {
           False_Alarm();
-          
-           if (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
+          Clock2 = millis();
+           while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
            {
-            Serial.println("False Alarm");
-            delay(100);
-            TriggerArmed = false ;
-            WTF = true;
-            
-            PressTime = 0;
-            break;   
-            }
-            
+              int PressTime2 = millis() - Clock2 ;
+              Serial.println("False Alarm");
+              Serial.println(PressTime2);
+              delay(100);
 
+            if (PressTime2 > 2000)
+            {
+              Serial.println("Alarm Canceled");
+              TriggerArmed = false ;
+              WTF = true;
+              PressTime = 0;
+              break;                 
+            }          
+            }
         } 
 
-        if (WTF == true)
-        {
-          WTF = false;
-          break;
-        }
-
-        
-               
-
-          if (PressTime > 20000)
-          {
-            break;
-          }
-        }
-                  
+            if (WTF == true)
+            {
+              WTF = false;
+              break;
+            }
+            
+ 
 // ===========  ALARM TRIGGERING ===============\\ 
 
            if (TriggerArmed == true && PressTime > 20000)
@@ -107,7 +103,8 @@ void CheckButton()
               }
       
       }
-     }  
+     }
+}  
    
 
 
@@ -119,22 +116,8 @@ void False_Alarm()
 
          PressTime = (millis() - Clock - 2000) ;
 
-//         if ((PressTime % 1) == 0)
-//         {
-//          RGB_LED("RED");
-//          delay(200);
-//         }
-//
-//         if ((PressTime % 1) == 1)
-//         {
-//          RGB_LED("BLUE");
-//          delay(200);
-//         }
-
-
           RGB_LED("RED");
           delay(200);
-        
         
           RGB_LED("BLUE");
           delay(200);
