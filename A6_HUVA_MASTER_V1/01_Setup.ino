@@ -1,4 +1,4 @@
-/////////////////////////////////   SETUP   /////////////////////////////////////////////
+ /////////////////////////////////   SETUP   /////////////////////////////////////////////
 
 void setup(){
 
@@ -34,7 +34,12 @@ void setup(){
   Serial.begin(9600); // baudrate for serial monitor
   SIM900.begin(9600); // baudrate for GSM shield
   delay(1000); //Let the GSM module connect
-  receive_message();
+  receive_message(); 
+
+  
+   SIM900.println("AT+IPR=9600\r"); 
+   receive_message();
+  delay(5000);
 
    SIM900.println("AT\r"); 
    receive_message();

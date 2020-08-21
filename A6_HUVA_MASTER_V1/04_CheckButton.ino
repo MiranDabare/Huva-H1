@@ -56,22 +56,27 @@ void CheckButton()
 
 void Alarm_Triggering()
 {
-//             Serial.println("Triggering Sent");
+//  String ServerNumber = "+94769295070";
+//String ServerNumber2 = "+94774061725";
+//
+//String DemoNumber1  = "+94764035418"; //Console 1
+//String DemoNumber2  = "+94774701366"; // Console 2
+//
+//String TestNumber  = "+94774061725";
+//
+//String DemoMessage1 = "SEC12345 TRIGGER LOUD";
+//String DemoMessage2 = "SEC12345 TRIGGER LOUD";
+//String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
+//String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
 
-//              SendSMS = UserMessage1;
-             
-//              wait = true;
-//              SIM900.println("AT+CMGD=1,4\r");  
-              delay(3000);
-              
               wait = true;
-              send_message(UserMessage1); 
+              send_message(UserMessage2); 
               Serial.println("SMS Sent");
               delay(3000);
               receive_message();
               
               wait = true;
-              send_message_demo2(DemoMessage2);   
+              send_message_demo1(DemoMessage1);   
            
               Serial.println("SMS Sent1");
               delay(3000);

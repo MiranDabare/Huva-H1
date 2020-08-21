@@ -5,7 +5,11 @@ void Sleep()
     sleep_enable();//Enabling sleep mode
     attachInterrupt(0, wakeUp, LOW);//attaching a interrupt to pin d2
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);//Setting the sleep mode, in our case full sleep
+    
     digitalWrite(LED_BUILTIN,LOW);//turning LED off
+    digitalWrite(REMOTE_GND_PIN, LOW);
+     digitalWrite(GSM_PIN, LOW);
+    
     RGB_LED("OFF");
     delay(1000); //wait a second to allow the led to be turned off before going to sleep
     sleep_cpu();//activating sleep mode

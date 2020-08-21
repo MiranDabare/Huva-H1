@@ -58,17 +58,19 @@ String SendSMS = "";
 //String DeviceBatchID = "BAT12345" ; 
 String DeviceID = "HMD1";
 
-String ServerNumber = "+94774061725";
-//String ServerNumber2 = "+94778755176";
+String ServerNumber = "+94769295070";
+String ServerNumber2 = "+94774061725";
 
-String DemoNumber2  = "+94764035418";
-//String DemoNumber1  = "+94774701366";
+String DemoNumber1  = "+94764035418"; //Console 1
+String DemoNumber2  = "+94774701366"; // Console 2
+
 String TestNumber  = "+94774061725";
 
-//String DemoMessage1 = "SEC12345 TRIGGER SILENT";
+String DemoMessage1 = "SEC12345 TRIGGER LOUD";
 String DemoMessage2 = "SEC12345 TRIGGER LOUD";
 String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
-//String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
+String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
+
 String TestMessage = "This module is working fine :)";
 
 String SecurityKey = "SEC12345";
