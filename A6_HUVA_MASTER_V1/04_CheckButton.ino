@@ -31,7 +31,7 @@ void CheckButton()
     
 
       
-      if (PressTime > 2000 && PressTime < 8000)
+      if (PressTime > 500 && PressTime < 8000)
       {
         PressTime = 0;
         Beeper(); //Turn on the LED to let the user know alert has been set
@@ -70,13 +70,13 @@ void Alarm_Triggering()
 //String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
 
               wait = true;
-              send_message(UserMessage2); 
+              send_message(UserMessage1); 
               Serial.println("SMS Sent");
               delay(3000);
               receive_message();
               
               wait = true;
-              send_message_demo1(DemoMessage1);   
+              send_message_demo2(DemoMessage2);   
            
               Serial.println("SMS Sent1");
               delay(3000);
@@ -93,11 +93,11 @@ void Button_Timer()
   Clock = millis();
       while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
     {
-//      Serial.println(PressTime);
+      Serial.println(PressTime);
       PressTime = millis() - Clock ; 
       delay(50);
 
-      if(PressTime > 2000 && PressTime < 8000)
+      if(PressTime > 500 && PressTime < 8000)
       {
         RGB_LED("YELLOW");
         digitalWrite(BUZZER_PIN, HIGH);        
