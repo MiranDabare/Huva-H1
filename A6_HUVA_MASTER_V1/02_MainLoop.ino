@@ -99,18 +99,24 @@ if(incomingData.indexOf(SecurityKey)>=0)
      incomingData.remove(0);  
   }
 
+    else if(incomingData.indexOf("SIGNALSTRENGTH")>=0) // Format "SECXXXXX CHECK"
+  {
+    
+    SendSMS = "ALL SMS DATABASE CLEARED: " + DeviceID ;
+    // Send a sms back to confirm that the relay is turned on
+    
+  SIM900.println("AT+CSQ\r");  
+  delay(1000);
+  String Info = incomingData;
 
-//    else if(incomingData.indexOf("UPDATEID")>=0) // Format "SECXXXXX UPDATEID @HMDXXXXXX"
-//  {
-//    if(incomingData.indexOf(DeviceID)>=0)
-//    { 
-//    
-//    int KeyIndex = incomingData.indexOf('%');
-//    DeviceID = incomingData.substring(KeyIndex+1);
-//    incomingData.remove(0);  
-//    }
-//  }
+    wait = true;
+    send_message(SendSMS);
+    incomingData.remove(0);  
+  }
+
+
 }
+
   else{
     //SIM900.println("AT+CMGD=1,4");   
   }
@@ -118,14 +124,3 @@ if(incomingData.indexOf(SecurityKey)>=0)
 
        
 } 
-
-
-
-//This line checks whether the host number is changed
-// FORMAT -   " NUM 077406125"
-// INDEX REF-   0123456789012
-
-
-
-
-/////////////////////////////////   BEEPER SEQUENCE CODE   /////////////////////////////////////////////
