@@ -3,7 +3,7 @@
 void loop()
 {
 
-//  CheckButton();
+  CheckButton();
   receive_message();
   
 if(incomingData.indexOf(SecurityKey)>=0)

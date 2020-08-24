@@ -2,6 +2,9 @@ import controlP5.*; //import ControlP5 library
 import processing.serial.*;
 
 String myText="";
+String Test4Text="";
+
+int TestNumber = 1;
 
 Serial port;
 
@@ -45,6 +48,11 @@ void setup(){ //same as arduino program
     .setSize(180, 70)      //(width, height)
     .setFont(font)
   ;
+    cp5.addButton("Buzzer_On")     //"alloff" is the name of button
+    .setPosition(100, 450)  //x and y coordinates of upper left corner of button
+    .setSize(100, 50)      //(width, height)
+    .setFont(font)
+  ;
   
     cp5.addButton("SMS_Sending")     //"red" is the name of button
     .setPosition(350, 50)  //x and y coordinates of upper left corner of button
@@ -76,8 +84,33 @@ void draw(){  //same as loop in arduino
   textFont(font);
   text("HUVA H1 TEST PANEL", 180, 30);  // ("text", x coordinate, y coordinat)
   
+  if (TestNumber == 2)
+  {
   text(myText, 130, 240);
-myText="";
+  myText="";
+  }
+  
+   if (TestNumber == 3)
+  {
+  text(myText, 130, 340);
+  myText="";
+  }
+  
+     if (TestNumber == 4)
+  {
+  text(myText, 130, 440);
+  myText="";
+  }
+  
+       if (TestNumber == 5)
+  {
+  text(myText, 230, 240);
+  myText="";
+  }
+
+
+
+
 }
 
 void serialEvent (Serial port){
@@ -93,18 +126,29 @@ void RGB_Test(){
 
 void Button_Test(){
   port.write('2');
+  TestNumber = 2;
 }
 
 void Remote_Reciever(){
   port.write('3');
+  TestNumber = 3;
 }
 
 void Buzzer_Test(){
   port.write('4');
+  TestNumber = 4;
+}
+
+void Buzzer_On(){
+  for (int i = 0; i < 10; i++)
+  {
+    port.write('9');
+  }
 }
 
 void SMS_Sending(){
   port.write('5');
+  TestNumber = 5;
 }
 
 void SMS_Recieving(){
