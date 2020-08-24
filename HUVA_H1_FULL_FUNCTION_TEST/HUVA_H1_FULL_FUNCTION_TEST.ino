@@ -79,6 +79,8 @@ bool Pass = false;
 bool GSMPass = false;
 bool ConsolePass = false;
 
+ char val;
+
 // //============ RGB LED COLOUR GOVERNING CODE ===============\\
 //void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
 //{
@@ -146,31 +148,61 @@ void Processing_Test()
     if(Serial.available())
     {  //id data is available to read
 
-    char val = Serial.read();
+     val = Serial.read();
 
     if (val == '1')
     {       //if r received
-      Test1();
-      
+      Test1();      
     }
       
     if (val == '2')
     {
-      for (int i = 0; i<5000 ; i++)
+      for (int i = 0; i<500 ; i++)
       {
         Test2();
       }
-      
-    }
+     }
 
         if (val == '3')
     {
-      for (int i = 0; i<5000 ; i++)
+      for (int i = 0; i<500 ; i++)
       {
         Test3();
-      }
-      
+      }      
     }
+
+        if (val == '4')
+    {
+      for (int i = 0; i<500 ; i++)
+      {
+        Test4();
+        val = Serial.read();
+      }      
+    }
+
+        if (val == '5')
+    {
+      
+        Test5();
+          
+    }
+
+        if (val == '6')
+    {
+      for (int i = 0; i<2000 ; i++)
+      {
+        Test6();
+      }      
+    }
+
+        if (val == '7')
+    {
+      for (int i = 0; i<500 ; i++)
+      {
+        Test7();
+      }      
+    }
+      
       
     
     }
@@ -239,42 +271,25 @@ void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
 
 void Test1()
 {
-//  RGB_color(0, 0, 0); // WHITE
-//    delay(2000);
-//  RGB_color(0, 0, 255); // YELLOW
-//  delay(2000);
-//  RGB_color(0, 255, 0); // PINK
-//  delay(2000);
-//  RGB_color(255, 0, 0); // CYAN
-//  delay(2000);
-//    RGB_color(255, 255, 0); // BLUE
-//  delay(2000);
-//  RGB_color(0, 255, 255); // RED
-//  delay(2000);
-//  RGB_color(255, 0, 255); // GREEN
-//  delay(2000);
-//
-//  RGB_color(255, 255, 255); // OFF
-//  delay(2000);
 
 RGB_LED("WHITE");
-delay(2000);
+delay(1000);
 RGB_LED("YELLOW");
-delay(2000);
+delay(1000);
 RGB_LED("PINK");
-delay(2000);
+delay(1000);
 RGB_LED("CYAN");
-delay(2000);
+delay(1000);
 RGB_LED("BLUE");
-delay(2000);
+delay(1000);
 RGB_LED("RED");
-delay(2000);
+delay(1000);
 RGB_LED("RED");
-delay(2000);
+delay(1000);
 RGB_LED("GREEN");
-delay(2000);
+delay(1000);
 RGB_LED("OFF");
-delay(2000);
+delay(1000);
  
 }
 
@@ -421,7 +436,7 @@ void Test4() // Buzzer Test
   
   }
   
-  if(State == LOW)
+  if(State == LOW || val == '9')
   {
     Serial.println("Im in Low");
     digitalWrite(BUZZER_PIN, HIGH);
@@ -436,12 +451,12 @@ void Test4() // Buzzer Test
   
   
  delay(2000);
-   Serial.println("Im in High");
+   Serial.println("Buzzer Off");
    digitalWrite(BUZZER_PIN, LOW);
   RGB_color(255, 255, 0); // Yellow
   
  delay(2000);
-    Serial.println("Im in Low");
+    Serial.println("Buzzer On");
     digitalWrite(BUZZER_PIN, HIGH);
     RGB_color(0, 0, 255); // Blue
    
@@ -469,7 +484,7 @@ void Test5_Init()
 
   SIM900.begin(9600); // baudrate for GSM shield
 
-   SIM900.print("AT+CUSD=0\r"); 
+    SIM900.println("AT+IPR=9600\r"); 
   delay(2000);
 
 
