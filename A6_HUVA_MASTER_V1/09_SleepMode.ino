@@ -14,13 +14,13 @@ void Sleep()
     delay(1000); //wait a second to allow the led to be turned off before going to sleep
     sleep_cpu();//activating sleep mode
       delay(1000);
-    Serial.println("just woke up!");//next line of code executed after the interrupt 
+//    Serial.println("just woke up!");//next line of code executed after the interrupt 
     digitalWrite(LED_BUILTIN,HIGH);//turning LED on
    
 }
 
 void wakeUp(){
-  Serial.println("Interrrupt Fired");//Print message to serial monitor
+//  Serial.println("Interrrupt Fired");//Print message to serial monitor
    sleep_disable();//Disable sleep mode
    delay(1000);
     

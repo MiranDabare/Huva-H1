@@ -2,6 +2,9 @@
 
 void setup(){
 
+ 
+
+
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   
   pinMode(REMOTE_D0_PIN, INPUT);
@@ -64,8 +67,13 @@ void setup(){
   receive_message(); 
   delay(2000);
 
+    str = read_StringEEPROM(0);
+    SecurityKey = str;
+    Serial.println(str);
+ delay(1000);
+
   Serial.println("gprs initialize done!");
-    Serial.println("start to send message ...");
+//    Serial.println("start to send message ...");
     RGB_LED("BLUE");
     
 }

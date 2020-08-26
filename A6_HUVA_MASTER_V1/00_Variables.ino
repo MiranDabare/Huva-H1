@@ -32,6 +32,10 @@
 #include <avr/sleep.h>
 #include <SoftwareSerial.h> // Library for using serial communication
 SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial pins
+#include <EEPROMex.h>
+
+
+String str;
 //
 
 #define BUZZER_PIN  9
@@ -74,7 +78,7 @@ String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
 
 String TestMessage = "This module is working fine :)";
 
-String SecurityKey = "SEC12345";
+String SecurityKey;
 
 /////////////////////////////////   VARIABLES   /////////////////////////////////////////////
 
