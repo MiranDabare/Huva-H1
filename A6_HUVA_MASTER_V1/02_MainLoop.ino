@@ -5,6 +5,7 @@ void loop()
 
   CheckButton();
   receive_message();
+//  Serial.println(Store);
   
 if(incomingData.indexOf(SecurityKey)>=0)
 {
@@ -99,20 +100,20 @@ if(incomingData.indexOf(SecurityKey)>=0)
      incomingData.remove(0);  
   }
 
-    else if(incomingData.indexOf("SIGNALSTRENGTH")>=0) // Format "SECXXXXX CHECK"
-  {
-    
-    SendSMS = "ALL SMS DATABASE CLEARED: " + DeviceID ;
-    // Send a sms back to confirm that the relay is turned on
-    
-  SIM900.println("AT+CSQ\r");  
-  delay(1000);
-  String Info = incomingData;
-   
-    wait = true;
-    send_message(Info);
-    incomingData.remove(0);  
-  }
+//    else if(incomingData.indexOf("SIGNALSTRENGTH")>=0) // Format "SECXXXXX CHECK"
+//  {
+//    
+//    SendSMS = "ALL SMS DATABASE CLEARED: " + DeviceID ;
+//    // Send a sms back to confirm that the relay is turned on
+//    
+//  SIM900.println("AT+CSQ\r");  
+//  delay(1000);
+//  String Info = incomingData;
+//   
+//    wait = true;
+//    send_message(Info);
+//    incomingData.remove(0);  
+//  }
 
     else if(incomingData.indexOf("Test")>=0) // Format "SECXXXXX Test @XXXXX"
   {
@@ -121,27 +122,37 @@ if(incomingData.indexOf(SecurityKey)>=0)
 
    
   SIM900.println("AT"); //Once the handshake test is successful, it will back to OK
-//  updateSerial();
-  SIM900.println("AT+CSQ"); //Signal quality test, value range is 0-31 , 31 is the best
-//  updateSerial();
-  SIM900.println("AT+CCID"); //Read SIM information to confirm whether the SIM is plugged
-//  updateSerial();
-  SIM900.println("AT+CREG?"); //Check whether it has registered in the network
-//  updateSerial();
-    SIM900.println("AT+CGSN"); //Check whether it has registered in the network
-//  updateSerial();
-    SIM900.println("AT+GSN"); //Check whether it has registered in the network
-//  updateSerial();
-    SIM900.println("AT+CNUM"); //Check whether it has registered in the network
-//  updateSerial();
-  
+  delay(100);
   receive_message();
-  SendSMS = Store;
-//  Serial.println(SendSMS);
+  SIM900.println("AT+CSQ"); //Signal quality test, value range is 0-31 , 31 is the best
+   delay(100);
+  receive_message();
+  SIM900.println("AT+CCID"); //Read SIM information to confirm whether the SIM is plugged
+   delay(100);
+  receive_message();
+//  SIM900.println("AT+CREG?"); //Check whether it has registered in the network
+//   delay(100);
+//  receive_message();
+//    SIM900.println("AT+CGSN"); //Check whether it has registered in the network
+//     delay(100);
+//  receive_message();
+//    SIM900.println("AT+GSN"); //Check whether it has registered in the network
+//     delay(100);
+//  receive_message();
+//    SIM900.println("AT+CNUM"); //Check whether it has registered in the network
+//     delay(100);
+  receive_message();
+  
+ 
+//  SendSMS = Store;
+   delay(100);
+  Serial.println(SendSMS);
     wait = true;
     send_message(SendSMS);
+     delay(100);
     incomingData.remove(0);
-    resetFunc();  
+    delay(5000);
+    resetFunc ();  
   }
 
   

@@ -71,9 +71,10 @@ void receive_message()
   if (SIM900.available() > 0)
   {
     incomingData = SIM900.readString(); // Get the data from the serial port.
-    Store = Store + SIM900.readString();
-
+//    Store.concat(incomingData);
+    
     Serial.print(incomingData); 
+//Serial.println(Store);
     delay(10); 
 
     }
