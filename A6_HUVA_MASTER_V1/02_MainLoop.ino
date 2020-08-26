@@ -42,10 +42,13 @@ if(incomingData.indexOf(SecurityKey)>=0)
     incomingData.remove(0);  
   }
 
-  else if(incomingData.indexOf("UPDATENUMB")>=0) // Format "SECXXXXX UPDATENUMB @077XXXXXX"
+  else if(incomingData.indexOf("UPDATENUMB")>=0) // Format "SECXXXXX UPDATENUMB @+9477XXXXXXX"
   {    
     int KeyIndex = incomingData.indexOf('@');
-    ServerNumber = incomingData.substring(KeyIndex+1);
+    String NServerNumber = incomingData.substring(KeyIndex+1, KeyIndex+12);
+    writeString(15, NServerNumber);  //Address 10 and String type data
+    
+    
     //incomingData.remove(0);
 
        SendSMS = "Connected to new Server! DEVICE ID: " + DeviceID ;
@@ -60,9 +63,9 @@ if(incomingData.indexOf(SecurityKey)>=0)
   {    
     int KeyIndex = incomingData.indexOf('@');
     String NSecurityKey = incomingData.substring(KeyIndex+1,KeyIndex+9);
-    write_StringEEPROM(0, NSecurityKey); //write_StringEEPROM or update_StringEEPROM(Address, String)
+    writeString(0, NSecurityKey);  //Address 10 and String type data
 
-    SendSMS = "Security Key Changed To: " + SecurityKey + " DEVICE ID: " + DeviceID ;
+    SendSMS = "Security Key Changed To: " + NSecurityKey + " DEVICE ID: " + DeviceID ;
     wait = true;
      send_message(SendSMS); 
      Serial.println("SMS Sent");

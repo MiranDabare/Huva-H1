@@ -67,9 +67,20 @@ void setup(){
   receive_message(); 
   delay(2000);
 
-    str = read_StringEEPROM(0);
-    SecurityKey = str;
-    Serial.println(str);
+     String NewSecKey;
+  NewSecKey = read_String(0);
+  SecurityKey = NewSecKey;
+  Serial.print("Read Data:");
+  Serial.println(SecurityKey);
+  delay(1000);
+
+   String NewServNumb;
+  NewServNumb = read_String(15);
+  ServerNumber = NewServNumb;
+  Serial.print("Read Data:");
+  Serial.println(ServerNumber);
+  delay(1000);
+  
  delay(1000);
 
   Serial.println("gprs initialize done!");
