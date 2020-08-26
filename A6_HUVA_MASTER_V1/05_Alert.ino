@@ -13,9 +13,7 @@ void Alert(){
             tone(BUZZER_PIN, hz, 600);
             delay(5);    
            }
- 
-        
-  
+           
    RGB_LED("RED");
     delay(50);
   RGB_LED("BLUE");

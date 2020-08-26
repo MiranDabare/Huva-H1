@@ -39,11 +39,11 @@ void setup(){
   
    SIM900.println("AT+IPR=9600\r"); 
    receive_message();
-  delay(5000);
+  delay(2000);
 
    SIM900.println("AT\r"); 
    receive_message();
-  delay(5000);
+  delay(2000);
 
 
    // set SMS mode to text mode
@@ -62,7 +62,7 @@ void setup(){
   SIM900.println("AT+CMGD=1,4\r"); 
   delay(1000);
   receive_message(); 
-  delay(5000);
+  delay(2000);
 
   Serial.println("gprs initialize done!");
     Serial.println("start to send message ...");

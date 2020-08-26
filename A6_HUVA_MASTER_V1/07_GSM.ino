@@ -3,17 +3,16 @@ void send_message(String SendSMS)
  
   while (wait == true){
     RGB_LED("PINK");
-//    SIM900.print("AT+CUSD=0\r"); 
+
     delay(100);
   SIM900.println("AT+CMGF=1");    //Set the GSM Module in Text Mode
-  delay(100);  
-//  SIM900.println("AT+CMGS=\"+0774061725\""); // Replace it with your mobile number
+  delay(500);  
     SIM900.println("AT+CMGS=\"" + ServerNumber2 + "\""); // Replace it with your mobile number
-  delay(100);
+  delay(500);
     SIM900.println(SendSMS);   // The SMS text you want to send
-  delay(100);
+  delay(500);
   SIM900.println((char)26);  // ASCII code of CTRL+Z
-  delay(100);
+  delay(500);
   SIM900.println();
   RGB_LED("CYAN");
   delay(1000);
@@ -72,8 +71,10 @@ void receive_message()
   if (SIM900.available() > 0)
   {
     incomingData = SIM900.readString(); // Get the data from the serial port.
-//   RGB_LED("YELLOW");
+//    Store.concat(incomingData);
+    
     Serial.print(incomingData); 
+//Serial.println(Store);
     delay(10); 
 
     }

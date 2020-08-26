@@ -31,7 +31,7 @@ void CheckButton()
     
 
       
-      if (PressTime > 2000 && PressTime < 8000)
+      if (PressTime > 200 && PressTime < 8000)
       {
         PressTime = 0;
         Beeper(); //Turn on the LED to let the user know alert has been set
@@ -91,13 +91,13 @@ void Alarm_Triggering()
 void Button_Timer()
 {
   Clock = millis();
-      while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH)
+      while (digitalRead(BUTTON_PIN) == LOW || digitalRead(REMOTE_D0_PIN) == HIGH || digitalRead(REMOTE_D1_PIN) == HIGH)
     {
-//      Serial.println(PressTime);
+      Serial.println(PressTime);
       PressTime = millis() - Clock ; 
       delay(50);
 
-      if(PressTime > 2000 && PressTime < 8000)
+      if(PressTime > 200 && PressTime < 8000)
       {
         RGB_LED("YELLOW");
         digitalWrite(BUZZER_PIN, HIGH);        
@@ -139,7 +139,7 @@ void Alarm_Buffer()
      
 //    Serial.println(PressTime2);
 
-    if(PressTime > 2000 && PressTime < 3000)
+    if(PressTime > 2000 && PressTime < 3000 || digitalRead(REMOTE_D1_PIN) == HIGH)
     {
 //      Serial.println("False Alarm");
       TriggerArmed = false;

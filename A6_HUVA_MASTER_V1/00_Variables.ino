@@ -43,16 +43,17 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define LED_GREEN_PIN 5
 #define LED_BLUE_PIN  6
 
-#define REMOTE_D3_PIN  7
-#define REMOTE_GND_PIN  14
-#define REMOTE_D1_PIN  16
-#define REMOTE_D2_PIN  15
-#define REMOTE_D0_PIN  17
+#define REMOTE_D3_PIN  15 // A1 - D
+#define REMOTE_GND_PIN  14 
+#define REMOTE_D1_PIN  17 //A3 -B
+#define REMOTE_D2_PIN  16 //A2 - C
+#define REMOTE_D0_PIN  7 // - A
 
 #define SIREN_PIN  8
 #define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
 String incomingData = "";   // for storing incoming serial data
+//String Store = "TEST RESULTS - ";
 String message = "";   // A String for storing the message
 String SendSMS = "";
 //String DeviceBatchID = "BAT12345" ; 
