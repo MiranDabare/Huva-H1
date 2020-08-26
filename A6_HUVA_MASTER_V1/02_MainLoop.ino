@@ -108,11 +108,43 @@ if(incomingData.indexOf(SecurityKey)>=0)
   SIM900.println("AT+CSQ\r");  
   delay(1000);
   String Info = incomingData;
-
+   
     wait = true;
-    send_message(SendSMS);
+    send_message(Info);
     incomingData.remove(0);  
   }
+
+    else if(incomingData.indexOf("Test")>=0) // Format "SECXXXXX Test @XXXXX"
+  {
+//     int KeyIndex = incomingData.indexOf('@');
+//    String Tester = incomingData.substring(KeyIndex+1);
+
+   
+  SIM900.println("AT"); //Once the handshake test is successful, it will back to OK
+//  updateSerial();
+  SIM900.println("AT+CSQ"); //Signal quality test, value range is 0-31 , 31 is the best
+//  updateSerial();
+  SIM900.println("AT+CCID"); //Read SIM information to confirm whether the SIM is plugged
+//  updateSerial();
+  SIM900.println("AT+CREG?"); //Check whether it has registered in the network
+//  updateSerial();
+    SIM900.println("AT+CGSN"); //Check whether it has registered in the network
+//  updateSerial();
+    SIM900.println("AT+GSN"); //Check whether it has registered in the network
+//  updateSerial();
+    SIM900.println("AT+CNUM"); //Check whether it has registered in the network
+//  updateSerial();
+  
+  receive_message();
+  SendSMS = Store;
+//  Serial.println(SendSMS);
+    wait = true;
+    send_message(SendSMS);
+    incomingData.remove(0);
+    resetFunc();  
+  }
+
+  
 
 
 }
