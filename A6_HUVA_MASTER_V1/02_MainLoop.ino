@@ -5,9 +5,17 @@ void loop()
 
   CheckButton();
   receive_message();
-//  Serial.println(Store);
+  Services();
+
   
-if(incomingData.indexOf(SecurityKey)>=0)
+
+       
+} 
+
+
+void Services()
+{
+  if(incomingData.indexOf(SecurityKey)>=0)
 {
 
   // if received command is to turn on relay
@@ -90,19 +98,12 @@ if(incomingData.indexOf(SecurityKey)>=0)
     
   }
 
-//    else if(incomingData.indexOf("CLEARSMS")>=0) // Format "SECXXXXX CHECK"
-//  {
-//    
-//    SendSMS = "ALL SMS DATABASE CLEARED: " + DeviceID ;
-//    // Send a sms back to confirm that the relay is turned on
-//    
-//  SIM900.println("AT+CMGD=1,4\r");  
-//  delay(5000);
-//    wait = true;
-//    send_message(SendSMS);
-//     //Alert();
-//     incomingData.remove(0);  
-//  }
+    else if(incomingData.indexOf("RESET")>=0) // Format "SECXXXXX CHECK"
+  {
+    
+     resetFunc ();  
+
+  }
 
 //    else if(incomingData.indexOf("SIGNALSTRENGTH")>=0) // Format "SECXXXXX CHECK"
 //  {
@@ -169,5 +170,4 @@ if(incomingData.indexOf(SecurityKey)>=0)
   }
 
 
-       
-} 
+}

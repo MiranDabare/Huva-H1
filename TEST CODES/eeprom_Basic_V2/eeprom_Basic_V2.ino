@@ -5,7 +5,7 @@
  */
 
 #include <EEPROM.h>
-
+//
 void writeString(char add,String data);
 String read_String(char add);
 
@@ -13,7 +13,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
 //  EEPROM.begin(512);
-  String data = "SEC98765";
+  String data = "SEC12345";
   String data1 = "+94774061725";
 
   Serial.print("Writing Data:");
