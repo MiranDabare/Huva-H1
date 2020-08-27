@@ -71,16 +71,16 @@ void Alarm_Triggering()
 
               wait = true;
               send_message(UserMessage2); 
-              Serial.println("SMS Sent");
-              delay(1000);
+//              Serial.println("SMS Sent");
+//              delay(1000);
               receive_message();
               delay(1000);
               
               wait = true;
               send_message_demo1(DemoMessage1);   
            
-              Serial.println("SMS Sent1");
-              delay(1000);
+//              Serial.println("SMS Sent1");
+//              delay(1000);
               receive_message();
                delay(1000);
     

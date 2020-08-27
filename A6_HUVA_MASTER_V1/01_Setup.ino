@@ -70,15 +70,22 @@ void setup(){
      String NewSecKey;
   NewSecKey = read_String(0);
   SecurityKey = NewSecKey;
-  Serial.print("Read Data:");
-  Serial.println(SecurityKey);
+//  Serial.print("Read Data:");
+//  Serial.println(SecurityKey);
   delay(1000);
 
    String NewServNumb;
-  NewServNumb = read_String(15);
+  NewServNumb = read_String(9);
   ServerNumber = NewServNumb;
-  Serial.print("Read Data:");
-  Serial.println(ServerNumber);
+//  Serial.print("Read Data:");
+//  Serial.println(ServerNumber);
+  delay(1000);
+
+   String NewAlertBeeper;
+  NewAlertBeeper = read_String(22);
+  AlertBeeper = NewAlertBeeper;
+//  Serial.print("Read Data:");
+//  Serial.println(AlertBeeper);
   delay(1000);
   
  delay(1000);

@@ -6,6 +6,7 @@ void loop()
   CheckButton();
   receive_message();
   Services();
+//  Serial.println(BeeperOn);
 
   
 
@@ -33,11 +34,11 @@ void Services()
       
       Alert();
    
-      SendSMS = "Device Alerted! DEVICE ID: " + DeviceID ;
-      wait = true;
+//      SendSMS = "Device Alerted! DEVICE ID: " + DeviceID ;
+//      wait = true;
 //    send_message(SendSMS); 
-      Serial.println("SMS Sent");
-      incomingData.remove(0);
+//      Serial.println("SMS Sent");
+//      incomingData.remove(0);
       
     }
   else if(incomingData.indexOf("CHECK")>=0) // Format "SECXXXXX CHECK"
@@ -54,7 +55,7 @@ void Services()
   {    
     int KeyIndex = incomingData.indexOf('@');
     String NServerNumber = incomingData.substring(KeyIndex+1, KeyIndex+12);
-    writeString(15, NServerNumber);  //Address 10 and String type data
+    writeString(9, NServerNumber);  //Address 10 and String type data
     
     
     //incomingData.remove(0);
@@ -86,10 +87,13 @@ void Services()
   else if(incomingData.indexOf("UPDATEBEEPER")>=0) // Format "SECXXXXX UPDATEBEEPER @1 or @0"
   { 
     int KeyIndex = incomingData.indexOf('@');
-    BeeperOn = incomingData.substring(KeyIndex+1);
+    String NAlertBeeper = incomingData.substring(KeyIndex+1,KeyIndex+3);
+    writeString(22, NAlertBeeper);  //Address 10 and String type data
+     
+    AlertBeeper = incomingData.substring(KeyIndex+1);
    // incomingData.remove(0); 
 
-     SendSMS = "Beeper Status: " + BeeperOn + "DEVICE ID: " + DeviceID ;
+     SendSMS = "Beeper Status: " + AlertBeeper + "DEVICE ID: " + DeviceID ;
      wait = true;
      send_message(SendSMS); 
      Serial.println("SMS Sent");
