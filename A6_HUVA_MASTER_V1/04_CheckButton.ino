@@ -69,20 +69,22 @@ void Alarm_Triggering()
 //String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
 //String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
 
-              wait = true;
-              send_message(UserMessage2); 
-//              Serial.println("SMS Sent");
-//              delay(1000);
-              receive_message();
-              delay(1000);
+
               
               wait = true;
-              send_message_demo1(DemoMessage1);   
+              send_message_demo2(DemoMessage2);   
            
 //              Serial.println("SMS Sent1");
 //              delay(1000);
               receive_message();
                delay(1000);
+
+                             wait = true;
+              send_message(UserMessage1); 
+//              Serial.println("SMS Sent");
+//              delay(1000);
+              receive_message();
+              delay(1000);
     
           
               Alert();

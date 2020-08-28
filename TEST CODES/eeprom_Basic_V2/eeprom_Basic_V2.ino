@@ -24,8 +24,8 @@ void setup() {
 //  delay(10);
 //  writeString(9, data1);  //Address 10 and String type data
 //  delay(10);
-  writeString(22, data2);  //Address 10 and String type data
-  delay(10);
+//  writeString(22, data2);  //Address 10 and String type data
+//  delay(10);
 }
 
 void loop() {

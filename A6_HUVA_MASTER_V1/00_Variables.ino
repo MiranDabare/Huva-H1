@@ -61,7 +61,7 @@ String incomingData = "";   // for storing incoming serial data
 String message = "";   // A String for storing the message
 String SendSMS = "";
 //String DeviceBatchID = "BAT12345" ; 
-String DeviceID = "HMD1";
+//String DeviceID = "HMD1";
 
 String ServerNumber = "+94769295070";
 String ServerNumber2 = "+94774061725";
