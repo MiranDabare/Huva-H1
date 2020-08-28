@@ -6,7 +6,7 @@ void loop()
   CheckButton();
   receive_message();
   Services();
-//  Serial.println(BeeperOn);
+
 
   
 
@@ -44,7 +44,7 @@ void Services()
   else if(incomingData.indexOf("CHECK")>=0) // Format "SECXXXXX CHECK"
   {
     
-    SendSMS = "IM ALIVE! DEVICE ID: " + DeviceID ;
+    SendSMS = "IM ALIVE!" ;
     wait = true;
     send_message(SendSMS);
      //Alert();
@@ -60,7 +60,7 @@ void Services()
     
     //incomingData.remove(0);
 
-       SendSMS = "Connected to new Server! DEVICE ID: " + DeviceID ;
+       SendSMS = "Connected to new Server! DEVICE ID: ";
        wait = true;
      send_message(SendSMS); 
      Serial.println("SMS Sent");
@@ -74,7 +74,7 @@ void Services()
     String NSecurityKey = incomingData.substring(KeyIndex+1,KeyIndex+9);
     writeString(0, NSecurityKey);  //Address 10 and String type data
 
-    SendSMS = "Security Key Changed To: " + NSecurityKey + " DEVICE ID: " + DeviceID ;
+    SendSMS = "Security Key Changed To: " + NSecurityKey;
     wait = true;
      send_message(SendSMS); 
      Serial.println("SMS Sent");
@@ -93,7 +93,7 @@ void Services()
     AlertBeeper = incomingData.substring(KeyIndex+1);
    // incomingData.remove(0); 
 
-     SendSMS = "Beeper Status: " + AlertBeeper + "DEVICE ID: " + DeviceID ;
+     SendSMS = "Beeper Status: " + AlertBeeper;
      wait = true;
      send_message(SendSMS); 
      Serial.println("SMS Sent");
@@ -109,20 +109,22 @@ void Services()
 
   }
 
-//    else if(incomingData.indexOf("SIGNALSTRENGTH")>=0) // Format "SECXXXXX CHECK"
-//  {
-//    
-//    SendSMS = "ALL SMS DATABASE CLEARED: " + DeviceID ;
-//    // Send a sms back to confirm that the relay is turned on
-//    
-//  SIM900.println("AT+CSQ\r");  
-//  delay(1000);
-//  String Info = incomingData;
-//   
-//    wait = true;
-//    send_message(Info);
-//    incomingData.remove(0);  
-//  }
+    else if(incomingData.indexOf("SIGNALSTRENGTH")>=0) // Format "SECXXXXX CHECK"
+  {
+    
+    
+    // Send a sms back to confirm that the relay is turned on
+    
+  SIM900.println("AT+CSQ\r");  
+  delay(1000);
+  String Info = incomingData;
+   
+    wait = true;
+    send_message(Info);
+    incomingData.remove(0);  
+  }
+
+  
 
 //    else if(incomingData.indexOf("Test")>=0) // Format "SECXXXXX Test @XXXXX"
 //  {

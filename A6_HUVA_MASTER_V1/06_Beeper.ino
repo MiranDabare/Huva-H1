@@ -21,21 +21,21 @@ void Beeper()
   }
 
 
-//      if (BeeperOn.indexOf("OFF")>=0)
-//  {
-//      while (Counter < 10)
-//  {
-//      
-//       RGB_LED("YELLOW");
-//      delay(50);
-//      
-//      RGB_LED("RED");
-//      delay(50);  
-//
-//        Counter++;
-//  }
-//     RGB_LED("BLUE");
-//  }
+      if (BeeperOn.indexOf("OFF")>=0)
+  {
+      while (Counter < 10)
+  {
+      
+       RGB_LED("YELLOW");
+      delay(50);
+      
+      RGB_LED("RED");
+      delay(50);  
+
+        Counter++;
+  }
+     RGB_LED("BLUE");
+  }
 
       else 
  
