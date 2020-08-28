@@ -38,7 +38,7 @@ void send_message_demo1(String DemoMessage1)
   SIM900.println();
   RGB_LED("CYAN");
   delay(1000);  
-  SIM900.print("AT+CUSD=2\r"); 
+//  SIM900.print("AT+CUSD=2\r"); 
   wait =false;
   }
 }
@@ -59,7 +59,7 @@ void send_message_demo2(String DemoMessage2)
   SIM900.println((char)26);  // ASCII code of CTRL+Z
   delay(100);
   SIM900.println();
-  SIM900.print("AT+CUSD=2\r"); 
+//  SIM900.print("AT+CUSD=2\r"); 
   delay(100);  
   RGB_LED("CYAN");
   wait =false;
@@ -71,10 +71,10 @@ void receive_message()
   if (SIM900.available() > 0)
   {
     incomingData = SIM900.readString(); // Get the data from the serial port.
-//    Store.concat(incomingData);
+
     
-    Serial.print(incomingData); 
-//Serial.println(Store);
+//    Serial.print(incomingData); 
+
     delay(10); 
 
     }

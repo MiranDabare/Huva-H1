@@ -2,6 +2,9 @@
 
 void setup(){
 
+ 
+
+
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   
   pinMode(REMOTE_D0_PIN, INPUT);
@@ -64,8 +67,31 @@ void setup(){
   receive_message(); 
   delay(2000);
 
+     String NewSecKey;
+  NewSecKey = read_String(0);
+  SecurityKey = NewSecKey;
+//  Serial.print("Read Data:");
+//  Serial.println(SecurityKey);
+  delay(1000);
+
+   String NewServNumb;
+  NewServNumb = read_String(9);
+  ServerNumber = NewServNumb;
+//  Serial.print("Read Data:");
+//  Serial.println(ServerNumber);
+  delay(1000);
+
+   String NewAlertBeeper;
+  NewAlertBeeper = read_String(22);
+  AlertBeeper = NewAlertBeeper;
+//  Serial.print("Read Data:");
+//  Serial.println(AlertBeeper);
+  delay(1000);
+  
+ delay(1000);
+
   Serial.println("gprs initialize done!");
-    Serial.println("start to send message ...");
+//    Serial.println("start to send message ...");
     RGB_LED("BLUE");
     
 }
