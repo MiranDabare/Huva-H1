@@ -169,9 +169,9 @@ void Services()
 
 }
 
-  else{
-    //SIM900.println("AT+CMGD=1,4");   
-  }
+//  else{
+//    //SIM900.println("AT+CMGD=1,4");   
+//  }
 
 
 }

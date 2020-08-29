@@ -16,19 +16,7 @@
 // * THE SIM900 NEEDS 500+ uF CAPACITOR PARALLE TO THE POWER TO PREVENT FROM SURGE DYING
 
 /////////////////////////////////   HEADERS   /////////////////////////////////////////////
-/*
- * COLOURS FOR REFERENCE
- * 
-  RGB_color(0, 0, 0); // WHITE
-  RGB_color(0, 0, 255); // YELLOW
-  RGB_color(0, 255, 0); // PINK
-  RGB_color(255, 0, 0); // CYAN
-  RGB_color(255, 255, 0); // BLUE
-  RGB_color(0, 255, 255); // RED
-  RGB_color(255, 0, 255); // GREEN
-  RGB_color(255, 255, 255); // OFF
-  
-  */
+
 #include <avr/sleep.h>
 #include <SoftwareSerial.h> // Library for using serial communication
 SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial pins
@@ -58,25 +46,25 @@ String read_String(char add);
 
 String incomingData = "";   // for storing incoming serial data
 //String Store = "TEST RESULTS - ";
-String message = "";   // A String for storing the message
+//String message = "";   // A String for storing the message
 String SendSMS = "";
 //String DeviceBatchID = "BAT12345" ; 
 //String DeviceID = "HMD1";
 
-String ServerNumber = "+94769295070";
-String ServerNumber2 = "+94774061725";
+String ServerNumber = "+94774061725";
+//String ServerNumber2 = "+94774061725";
 
 String DemoNumber1  = "+94764035418"; //Console 1
 String DemoNumber2  = "+94774701366"; // Console 2
 
-String TestNumber  = "+94774061725";
+//String TestNumber  = "+94774061725";
 
 String DemoMessage1 = "SEC12345 TRIGGER LOUD";
-String DemoMessage2 = "SEC12345 TRIGGER LOUD";
+//String DemoMessage2 = "SEC12345 TRIGGER LOUD";
 String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
 String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
 
-String TestMessage = "This module is working fine :)";
+//String TestMessage = "This module is working fine :)";
 
 String SecurityKey;
 

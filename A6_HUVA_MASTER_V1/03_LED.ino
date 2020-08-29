@@ -20,15 +20,15 @@ void RGB_LED(String LEDColour)
     RGB_color(0, 0, 255); 
   }
 
-  if (LEDColour == "PINK")
-  {
-    RGB_color(0, 255, 0); 
-  }
+//  if (LEDColour == "PINK")
+//  {
+//    RGB_color(0, 255, 0); 
+//  }
 
-  if (LEDColour == "CYAN")
-  {
-    RGB_color(255, 0, 0); 
-  }
+//  if (LEDColour == "CYAN")
+//  {
+//    RGB_color(255, 0, 0); 
+//  }
 
   if (LEDColour == "BLUE")
   {
