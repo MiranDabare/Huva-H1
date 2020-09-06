@@ -35,9 +35,9 @@ SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial 
 #define GSM_PIN     4
 #define BUTTON_PIN  2
 
-#define LED_RED_PIN 3
+#define LED_RED_PIN 6
 #define LED_GREEN_PIN 5
-#define LED_BLUE_PIN  6
+#define LED_BLUE_PIN  3
 
 #define REMOTE_GND_PIN  14
 #define REMOTE_D0_PIN  7 // D
@@ -281,8 +281,6 @@ delay(1000);
 RGB_LED("CYAN");
 delay(1000);
 RGB_LED("BLUE");
-delay(1000);
-RGB_LED("RED");
 delay(1000);
 RGB_LED("RED");
 delay(1000);
