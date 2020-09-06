@@ -31,9 +31,9 @@ String read_String(char add);
 #define BUTTON_PIN  2
 
 
-#define LED_RED_PIN 3
+#define LED_RED_PIN 6
 #define LED_GREEN_PIN 5
-#define LED_BLUE_PIN  6
+#define LED_BLUE_PIN  3
 
 #define REMOTE_D3_PIN  15 // A1 - D
 #define REMOTE_GND_PIN  14 
@@ -78,6 +78,8 @@ String AlertBeeper = "OFF";
  bool Pass = false;
 bool GSMPass = false;
 bool ConsolePass = false;
+
+bool SignalOK = false;
 
 bool TriggerArmed =  false;
 bool Activate_Alarm =  false;

@@ -87,6 +87,42 @@ void setup(){
 //  Serial.print("Read Data:");
 //  Serial.println(AlertBeeper);
   delay(1000);
+
+
+while (SignalOK == false)
+{
+  SIM900.println("AT+CSQ\r"); 
+  delay(1000);
+  receive_message();
+  
+   if(incomingData.indexOf("+CSQ:")>=0) // Format "SECXXXXX CHECK"
+  {
+
+    int KeyIndex = incomingData.indexOf(':');
+    String Signal = incomingData.substring(KeyIndex+2,KeyIndex+4);
+           
+    
+   Serial.println(Signal.toInt());
+    incomingData.remove(0);  
+
+    if (Signal.toInt() >= 20)
+    {
+//      Serial.println("Signal is gud!");
+      SignalOK = true;
+    }
+
+    else
+    {
+//      Serial.println("Signal is bad!");
+      RGB_LED("RED");
+    }
+
+        incomingData.remove(0);  
+  }  
+
+//  Serial.println(Signal);
+
+}
   
  delay(1000);
 
