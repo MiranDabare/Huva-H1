@@ -72,22 +72,22 @@ void Alarm_Triggering()
 
               
               wait = true;
-              send_message_demo2(DemoMessage1);   
+              send_message_demo1(DemoMessage1);   
            
 //              Serial.println("SMS Sent1");
 //              delay(1000);
               receive_message();
                delay(2000);
 
-                             wait = true;
-              send_message(UserMessage1); 
+//                             wait = true;
+//              send_message(UserMessage1); 
 //              Serial.println("SMS Sent");
 //              delay(1000);
-              receive_message();
-              delay(2000);
+//              receive_message();
+//              delay(2000);
     
           
-              Alert();
+//              Alert();
 
               TriggerArmed = false;
 }

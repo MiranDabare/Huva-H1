@@ -52,18 +52,18 @@ String SendSMS = "";
 //String DeviceBatchID = "BAT12345" ; 
 //String DeviceID = "HMD1";
 
-String ServerNumber = "+94774061725";
+String ServerNumber = "87798";
 //String ServerNumber2 = "+94774061725";
 
-String DemoNumber1  = "+94764035418"; //Console 1
-String DemoNumber2  = "+94774701366"; // Console 2
+//String DemoNumber1  = "+94764035418"; //Console 1
+//String DemoNumber2  = "+94774701366"; // Console 2
 
 //String TestNumber  = "+94774061725";
 
-String DemoMessage1 = "SEC12345 TRIGGER LOUD";
+String DemoMessage1 = "HUVA SEC12345 TRIGGER LOUD";
 //String DemoMessage2 = "SEC12345 TRIGGER LOUD";
-String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
-String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
+//String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
+//String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
 
 //String TestMessage = "This module is working fine :)";
 
@@ -79,7 +79,6 @@ String AlertBeeper = "OFF";
  bool Pass = false;
 bool GSMPass = false;
 bool ConsolePass = false;
-
 bool SignalOK = false;
 
 bool TriggerArmed =  false;

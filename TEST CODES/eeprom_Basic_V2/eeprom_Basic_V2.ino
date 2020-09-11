@@ -14,7 +14,7 @@ void setup() {
   Serial.begin(9600);
 //  EEPROM.begin(512);
   String data = "SEC12345";
-  String data1 = "+94774061725";
+  String data1 = "87798";
    String data2 = "OFF";
 
   Serial.print("Writing Data:");
@@ -22,12 +22,12 @@ void setup() {
 
 //  writeString(0, data);  //Address 10 and String type data
 //  delay(10);
-//  writeString(9, data1);  //Address 10 and String type data
-//  delay(10);
+  writeString(9, data1);  //Address 10 and String type data
+  delay(10);
 //  writeString(22, data2);  //Address 10 and String type data
 //  delay(10);
-EEPROM.write(40, 0);  //Address 10 and String type data
-  delay(10);
+//EEPROM.write(40, 0);  //Address 10 and String type data
+//  delay(10);
 }
 
 void loop() {
