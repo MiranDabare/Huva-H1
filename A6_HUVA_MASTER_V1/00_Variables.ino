@@ -18,6 +18,7 @@
 /////////////////////////////////   HEADERS   /////////////////////////////////////////////
 
 #include <avr/sleep.h>
+#include "LowPower.h"
 #include <SoftwareSerial.h> // Library for using serial communication
 SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial pins
 #include <EEPROM.h>
@@ -87,6 +88,8 @@ bool Activate_Alarm =  false;
 int PressTime = 0;
 int Clock = 0;
 int Clock2 = 0;
+
+ bool SetupDone = false;
 
  void(* resetFunc) (void) = 0;
  

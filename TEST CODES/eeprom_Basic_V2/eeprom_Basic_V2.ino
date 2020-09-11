@@ -26,6 +26,8 @@ void setup() {
 //  delay(10);
 //  writeString(22, data2);  //Address 10 and String type data
 //  delay(10);
+EEPROM.write(40, 0);  //Address 10 and String type data
+  delay(10);
 }
 
 void loop() {
@@ -46,6 +48,9 @@ void loop() {
   recivedData2 = read_String(22);
   Serial.print("Read Data:");
   Serial.println(recivedData2);
+  delay(1000);
+
+  Serial.println(EEPROM.read(40));  //Address 10 and String type data
   delay(1000);
 }
 
