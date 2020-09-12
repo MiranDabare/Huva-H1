@@ -75,7 +75,7 @@ void Alarm_Triggering()
               send_message_demo1(DemoMessage1);   
            
 //              Serial.println("SMS Sent1");
-//              delay(1000);
+              delay(1000);
               receive_message();
                delay(2000);
 
