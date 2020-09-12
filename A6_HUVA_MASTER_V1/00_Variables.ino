@@ -18,6 +18,7 @@
 /////////////////////////////////   HEADERS   /////////////////////////////////////////////
 
 #include <avr/sleep.h>
+#include "LowPower.h"
 #include <SoftwareSerial.h> // Library for using serial communication
 SoftwareSerial SIM900(11, 10); // Pins 7, 8 are used as used as software serial pins
 #include <EEPROM.h>
@@ -45,26 +46,12 @@ String read_String(char add);
 #define RF_ENABLE_PIN  12 //Pull this down before transmitting
 
 String incomingData = "";   // for storing incoming serial data
-//String Store = "TEST RESULTS - ";
-//String message = "";   // A String for storing the message
+
 String SendSMS = "";
-//String DeviceBatchID = "BAT12345" ; 
-//String DeviceID = "HMD1";
 
-String ServerNumber = "+94774061725";
-//String ServerNumber2 = "+94774061725";
+String ServerNumber = "87798";
+String DemoMessage1 = "HUVA SEC12345 TRIGGER LOUD";
 
-String DemoNumber1  = "+94764035418"; //Console 1
-String DemoNumber2  = "+94774701366"; // Console 2
-
-//String TestNumber  = "+94774061725";
-
-String DemoMessage1 = "SEC12345 TRIGGER LOUD";
-//String DemoMessage2 = "SEC12345 TRIGGER LOUD";
-String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
-String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
-
-//String TestMessage = "This module is working fine :)";
 
 String SecurityKey;
 
@@ -78,7 +65,6 @@ String AlertBeeper = "OFF";
  bool Pass = false;
 bool GSMPass = false;
 bool ConsolePass = false;
-
 bool SignalOK = false;
 
 bool TriggerArmed =  false;
@@ -87,6 +73,8 @@ bool Activate_Alarm =  false;
 int PressTime = 0;
 int Clock = 0;
 int Clock2 = 0;
+
+ bool SetupDone = false;
 
  void(* resetFunc) (void) = 0;
  

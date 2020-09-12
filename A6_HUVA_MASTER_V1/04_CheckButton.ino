@@ -46,50 +46,20 @@ void CheckButton()
       {
        Sleep();
       }
-    
-}
+      }
 }
      
-  
-   
-
 
 void Alarm_Triggering()
-{
-//  String ServerNumber = "+94769295070";
-//String ServerNumber2 = "+94774061725";
-//
-//String DemoNumber1  = "+94764035418"; //Console 1
-//String DemoNumber2  = "+94774701366"; // Console 2
-//
-//String TestNumber  = "+94774061725";
-//
-//String DemoMessage1 = "SEC12345 TRIGGER LOUD";
-//String DemoMessage2 = "SEC12345 TRIGGER LOUD";
-//String UserMessage1 = "There is an Emergency at Mr. Kalubovila's Home!";
-//String UserMessage2 = "There is an Emergency at Mr. Dabare's Home!";
-
-
-              
-              wait = true;
-              send_message_demo2(DemoMessage1);   
-           
-//              Serial.println("SMS Sent1");
-//              delay(1000);
-              receive_message();
-               delay(2000);
-
-                             wait = true;
-              send_message(UserMessage1); 
-//              Serial.println("SMS Sent");
-//              delay(1000);
-              receive_message();
-              delay(2000);
-    
-          
-              Alert();
-
-              TriggerArmed = false;
+{ 
+  SendSMS = "HUVA SEC12345 TRIGGER LOUD";
+  wait = true;
+  send_message(SendSMS);
+  delay(1000);
+  receive_message();
+  delay(2000);
+  TriggerArmed = false;
+ 
 }
 
 void Button_Timer()
@@ -133,8 +103,6 @@ void Alarm_Buffer()
   while(TriggerArmed ==  true)
   {
     Button_Timer();
-
-//    Serial.println("Waiting");
     int PressTime2 = (millis() - Clock2) ;
 
     RGB_LED("RED");
@@ -159,6 +127,7 @@ void Alarm_Buffer()
       Activate_Alarm = true;
       TriggerArmed = false;
       Alarm_Triggering();
+//      Alert();
       break;
     }
 
