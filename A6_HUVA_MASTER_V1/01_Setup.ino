@@ -115,21 +115,16 @@ while (SignalOK == false)
 
     else
     {
-//      Serial.println("Signal is bad!");
       RGB_LED("RED");
     }
-
         incomingData.remove(0);  
-        
+       
   }  
-
-//  Serial.println(Signal);
-
 }
   
  delay(1000);
 
-  Serial.println("gprs initialize done!");
+  Serial.println("initialize done!");
 //    Serial.println("start to send message ...");
     RGB_LED("BLUE");
 
