@@ -2,15 +2,9 @@
 
 void loop()
 {
-
   CheckButton();
   receive_message();
-  Services();
-
-
-  
-
-       
+  Services();    
 } 
 
 
@@ -18,8 +12,6 @@ void Services()
 {
   if(incomingData.indexOf(SecurityKey)>=0)
 {
-
-  // if received command is to turn on relay
   if(incomingData.indexOf("TRIGGER")>=0  && incomingData.indexOf("+CMT:")>=0)
   {    
     if(incomingData.indexOf("SILENT")>=0)
@@ -32,40 +24,28 @@ void Services()
       AlertBeeper = "ON";
       }
       
-      Alert();
-   
-//      SendSMS = "Device Alerted! DEVICE ID: " + DeviceID ;
-//      wait = true;
-//    send_message(SendSMS); 
-//      Serial.println("SMS Sent");
-//      incomingData.remove(0);
-      
+      Alert();     
     }
-  else if(incomingData.indexOf("CHECK")>=0) // Format "SECXXXXX CHECK"
-  {
     
-    SendSMS = "IM ALIVE!" ;
+  else if(incomingData.indexOf("CHECK")>=0) // Format "SECXXXXX CHECK"
+  {    
+    SendSMS = "IM ALIVE!";
     wait = true;
-    send_message(SendSMS);
-     //Alert();
+    send_message(SendSMS);   
     incomingData.remove(0);  
   }
 
   else if(incomingData.indexOf("UPDATENUMB")>=0) // Format "SECXXXXX UPDATENUMB @+9477XXXXXXX"
   {    
     int KeyIndex = incomingData.indexOf('@');
-    String NServerNumber = incomingData.substring(KeyIndex+1, KeyIndex+12);
+    String NServerNumber = incomingData.substring(KeyIndex+1, KeyIndex+13);
     writeString(9, NServerNumber);  //Address 10 and String type data
-    
-    
-    //incomingData.remove(0);
+    ServerNumber = NServerNumber;
+    SendSMS = "Connected to new Server!";
+    wait = true;
+    send_message(SendSMS); 
+    incomingData.remove(0);
 
-       SendSMS = "Connected to new Server! DEVICE ID: ";
-       wait = true;
-     send_message(SendSMS); 
-     Serial.println("SMS Sent");
-     incomingData.remove(0);
-     //SendSMS.remove(0);
   }
 
     else if(incomingData.indexOf("UPDATESEC")>=0) // Format "SECXXXXX UPDATESEC @SECXXXXXX"
@@ -73,14 +53,10 @@ void Services()
     int KeyIndex = incomingData.indexOf('@');
     String NSecurityKey = incomingData.substring(KeyIndex+1,KeyIndex+9);
     writeString(0, NSecurityKey);  //Address 10 and String type data
-
-    SendSMS = "Security Key Changed To: " + NSecurityKey;
+    SendSMS = "Sec Key Changed: " + NSecurityKey;
     wait = true;
-     send_message(SendSMS); 
-     Serial.println("SMS Sent");
-     //incomingData.remove(0);
-    // SendSMS.remove(0);
-     
+    send_message(SendSMS); 
+   
     incomingData.remove(0);  
   }
 
@@ -89,91 +65,46 @@ void Services()
     int KeyIndex = incomingData.indexOf('@');
     String NAlertBeeper = incomingData.substring(KeyIndex+1,KeyIndex+3);
     writeString(22, NAlertBeeper);  //Address 10 and String type data
-     
     AlertBeeper = incomingData.substring(KeyIndex+1);
-   // incomingData.remove(0); 
-
-     SendSMS = "Beeper Status: " + AlertBeeper;
-     wait = true;
-     send_message(SendSMS); 
-     Serial.println("SMS Sent");
-     incomingData.remove(0);
-     //SendSMS.remove(0);
-    
+    SendSMS = "Beeper: " + AlertBeeper ;
+    wait = true;
+    send_message(SendSMS); 
+    incomingData.remove(0);    
   }
 
     else if(incomingData.indexOf("RESET")>=0) // Format "SECXXXXX CHECK"
   {
-    
-     resetFunc ();  
-
+    resetFunc ();  
   }
 
     else if(incomingData.indexOf("SIGNALSTRENGTH")>=0) // Format "SECXXXXX CHECK"
+  { 
+    SIM900.println("AT+CSQ\r");  
+    delay(1000);
+    receive_message();
+  
+   if(incomingData.indexOf("+CSQ:")>=0) // Format "SECXXXXX CHECK"
   {
-    
-    
-    // Send a sms back to confirm that the relay is turned on
-    
-  SIM900.println("AT+CSQ\r");  
-  delay(1000);
-  String Info = incomingData;
-   
+    int KeyIndex = incomingData.indexOf(':');
+    String Signal = incomingData.substring(KeyIndex+2,KeyIndex+4);
+           
+    SendSMS = "SIGNAL: " + Signal ;      
     wait = true;
-    send_message(Info);
+    send_message(SendSMS);
     incomingData.remove(0);  
   }
-
-  
-
-//    else if(incomingData.indexOf("Test")>=0) // Format "SECXXXXX Test @XXXXX"
-//  {
-////     int KeyIndex = incomingData.indexOf('@');
-////    String Tester = incomingData.substring(KeyIndex+1);
-//
-//   
-//  SIM900.println("AT"); //Once the handshake test is successful, it will back to OK
-//  delay(100);
-//  receive_message();
-//  SIM900.println("AT+CSQ"); //Signal quality test, value range is 0-31 , 31 is the best
-//   delay(100);
-//  receive_message();
-//  SIM900.println("AT+CCID"); //Read SIM information to confirm whether the SIM is plugged
-//   delay(100);
-//  receive_message();
-////  SIM900.println("AT+CREG?"); //Check whether it has registered in the network
-////   delay(100);
-////  receive_message();
-////    SIM900.println("AT+CGSN"); //Check whether it has registered in the network
-////     delay(100);
-////  receive_message();
-////    SIM900.println("AT+GSN"); //Check whether it has registered in the network
-////     delay(100);
-////  receive_message();
-////    SIM900.println("AT+CNUM"); //Check whether it has registered in the network
-////     delay(100);
-//  receive_message();
-//  
-// 
-////  SendSMS = Store;
-//   delay(100);
-//  Serial.println(SendSMS);
-//    wait = true;
-//    send_message(SendSMS);
-//     delay(100);
-//    incomingData.remove(0);
-//    delay(5000);
-//    resetFunc ();  
-//  }
-
-  
-
-
-}
-
-  else{
-    //SIM900.println("AT+CMGD=1,4");   
   }
 
-
+      else if(incomingData.indexOf("IMEI")>=0) // Format "SECXXXXX CHECK"
+  {
+    SIM900.println("AT+CGSN\r");  
+    delay(1000);
+    receive_message();
+    String IMEI = incomingData.substring(8);           
+    SendSMS = "IMEI: " + IMEI ;        
+    wait = true;
+    send_message(SendSMS);
+    incomingData.remove(0);  
+    }
+}
 }
