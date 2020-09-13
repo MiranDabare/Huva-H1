@@ -10,10 +10,10 @@ void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
 
 void RGB_LED(String LEDColour)
 {
-  if (LEDColour == "WHITE")
-  {
-    RGB_color(0, 0, 0); 
-  }
+//  if (LEDColour == "WHITE")
+//  {
+//    RGB_color(0, 0, 0); 
+//  }
 
   if (LEDColour == "YELLOW")
   {
