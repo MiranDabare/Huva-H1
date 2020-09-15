@@ -3,7 +3,7 @@
 void setup(){
 
  
-
+  BatteryCheck();
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   
@@ -25,11 +25,13 @@ void setup(){
   digitalWrite(GSM_PIN, LOW);
   digitalWrite(SIREN_PIN, LOW);
   digitalWrite(RF_ENABLE_PIN, HIGH);
+  delay(2000);
   digitalWrite(REMOTE_GND_PIN, HIGH);
+  delay(2000);
 
   RGB_LED("GREEN");
 
- delay(1000); //Let the GSM module connect
+ delay(10000); //Let the GSM module connect
 
   digitalWrite(GSM_PIN, HIGH);
   delay(5000);
@@ -87,12 +89,69 @@ void setup(){
 //  Serial.print("Read Data:");
 //  Serial.println(AlertBeeper);
   delay(1000);
+
+
+while (SignalOK == false)
+{
+  SIM900.println("AT+CSQ\r"); 
+  delay(1000);
+  receive_message();
+  
+   if(incomingData.indexOf("+CSQ:")>=0) // Format "SECXXXXX CHECK"
+  {
+
+    int KeyIndex = incomingData.indexOf(':');
+    String Signal = incomingData.substring(KeyIndex+2,KeyIndex+4);
+           
+    
+//   Serial.println(Signal.toInt());
+    incomingData.remove(0);  
+
+    if (Signal.toInt() >= 20)
+    {
+//      Serial.println("Signal is gud!");
+      SignalOK = true;
+    }
+
+    else
+    {
+      RGB_LED("RED");
+    }
+        incomingData.remove(0);  
+       
+  }  
+}
   
  delay(1000);
 
-  Serial.println("gprs initialize done!");
+  Serial.println("initialize done!");
 //    Serial.println("start to send message ...");
     RGB_LED("BLUE");
+
+    SetupDone = true;
+    EEPROM.write(40, 0);  //Address 10 and String type data
     
+}
+
+void BatteryCheck()
+{
+     int Count;
+  Count = EEPROM.read(40);
+  
+//  Serial.print("Read Data:");
+//  Serial.println(ServerNumber);
+  delay(1000);
+
+  Count++;
+
+
+  EEPROM.write(40, Count);  //Address 10 and String type data
+
+  if (Count >= 3) //Sleep the arduino
+  {
+   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+    EEPROM.write(40, 0);  //Address 10 and String type data
+  }
+
 }
     
