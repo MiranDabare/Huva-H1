@@ -90,6 +90,8 @@ void setup(){
 //  Serial.println(AlertBeeper);
   delay(1000);
 
+  BufferTime = EEPROMReadlong(45);
+
 
 while (SignalOK == false)
 {
@@ -125,13 +127,16 @@ while (SignalOK == false)
  delay(1000);
 
   Serial.println("initialize done!");
-//    Serial.println("start to send message ...");
+
     RGB_LED("BLUE");
 
     SetupDone = true;
     EEPROM.write(40, 0);  //Address 10 and String type data
     
 }
+
+
+//====================== BATTERY CHECK ======================
 
 void BatteryCheck()
 {
