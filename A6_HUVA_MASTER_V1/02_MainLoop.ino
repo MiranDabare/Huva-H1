@@ -106,5 +106,17 @@ void Services()
     send_message(SendSMS);
     incomingData.remove(0);  
     }
+
+       else if(incomingData.indexOf("BUFFERTIME")>=0) // Format "SECXXXXX BUFFERTIME @10000"
+  {
+    int KeyIndex = incomingData.indexOf('@');
+    String NAlertBeeper = incomingData.substring(KeyIndex+1,KeyIndex+7);
+    EEPROMWritelong(45, NAlertBeeper.toInt());
+    BufferTime = EEPROMReadlong(45);
+    SendSMS = "New Buffer: " + BufferTime ;
+    wait = true;
+    send_message(SendSMS); 
+    incomingData.remove(0);   
+    }
 }
 }

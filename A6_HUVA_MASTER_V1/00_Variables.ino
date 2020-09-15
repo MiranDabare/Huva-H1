@@ -61,8 +61,8 @@ String SecurityKey;
 bool Pressed = false;
 String BeeperOn = "ON";
 String AlertBeeper = "OFF";
-bool wait = true;
-bool Pass = false;
+ bool wait = true;
+ bool Pass = false;
 bool GSMPass = false;
 bool ConsolePass = false;
 bool SignalOK = false;
@@ -73,6 +73,10 @@ bool Activate_Alarm =  false;
 int PressTime = 0;
 int Clock = 0;
 int Clock2 = 0;
+
+int AlertCount = 120;
+
+long BufferTime = 5000;
 
  bool SetupDone = false;
 
