@@ -20,6 +20,7 @@ void setup() {
   Serial.print("Writing Data:");
   Serial.println(data);
 
+<<<<<<< Updated upstream
 //  writeString(0, data);  //Address 10 and String type data
 //  delay(10);
 //  writeString(9, data1);  //Address 10 and String type data
@@ -37,6 +38,16 @@ void setup() {
   EEPROMWritelong(50, 10000); //  EEPROMWritelong(address, number1);
       
       
+=======
+  writeString(0, data);  //Address 10 and String type data
+  delay(10);
+  writeString(9, data1);  //Address 10 and String type data
+  delay(10);
+  writeString(22, data2);  //Address 10 and String type data
+  delay(10);
+EEPROM.write(40, 0);  //Address 10 and String type data
+  delay(10);
+>>>>>>> Stashed changes
 }
 
 void loop() {
