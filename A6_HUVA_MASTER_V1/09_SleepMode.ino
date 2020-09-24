@@ -6,7 +6,7 @@ void Sleep()
     attachInterrupt(0, wakeUp, LOW);//attaching a interrupt to pin d2
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);//Setting the sleep mode, in our case full sleep
     
-    digitalWrite(LED_BUILTIN,LOW);//turning LED off
+//    digitalWrite(LED_BUILTIN,LOW);//turning LED off
     digitalWrite(REMOTE_GND_PIN, LOW);
      digitalWrite(GSM_PIN, LOW);
     
@@ -15,7 +15,7 @@ void Sleep()
     sleep_cpu();//activating sleep mode
       delay(1000);
 //    Serial.println("just woke up!");//next line of code executed after the interrupt 
-    digitalWrite(LED_BUILTIN,HIGH);//turning LED on
+//    digitalWrite(LED_BUILTIN,HIGH);//turning LED on
    
 }
 

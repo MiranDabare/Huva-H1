@@ -1,9 +1,5 @@
-bool WTF = false;
-
 void CheckButton()
 {
-// delay(50);
-//  Serial.println("Im here");
 
 // CONSOLE CHECK
   if (digitalRead(REMOTE_D2_PIN) == HIGH)
@@ -34,8 +30,8 @@ void CheckButton()
       if (PressTime > 50 && PressTime < 8000)
       {
         PressTime = 0;
-        Beeper(); //Turn on the LED to let the user know alert has been set
-        Serial.println("Button Pressed");
+        Beeper(); 
+//        Serial.println("Button Pressed");
         TriggerArmed =  true;
         delay(2000); // Delay to let go of the button
         Clock2 = millis();
@@ -120,7 +116,7 @@ void Alarm_Buffer()
       break;
     }
 
-    if(PressTime2 > 10000)
+    if(PressTime2 > BufferTime)
     {
 //      Serial.println("Activate Alarm");
       RGB_LED("GREEN");
