@@ -36,7 +36,7 @@ void setup() {
 
   EEPROMWritelong(45, 5000); //  EEPROMWritelong(address, number1);
   EEPROMWritelong(50, 10000); //  EEPROMWritelong(address, number1);
-      
+//      
       
 =======
   writeString(0, data);  //Address 10 and String type data
@@ -52,26 +52,26 @@ EEPROM.write(40, 0);  //Address 10 and String type data
 
 void loop() {
   // put your main code here, to run repeatedly:
-//  String recivedData;
-//  recivedData = read_String(0);
-//  Serial.print("Read Data:");
-//  Serial.println(recivedData);
-//  delay(1000);
+  String recivedData;
+  recivedData = read_String(0);
+  Serial.print("Read Data:");
+  Serial.println(recivedData);
+  delay(1000);
 //
-//  String recivedData1;
-//  recivedData1 = read_String(9);
-//  Serial.print("Read Data:");
-//  Serial.println(recivedData1);
-//  delay(1000);
+  String recivedData1;
+  recivedData1 = read_String(9);
+  Serial.print("Read Data:");
+  Serial.println(recivedData1);
+  delay(1000);
 //
-//   String recivedData2;
-//  recivedData2 = read_String(22);
-//  Serial.print("Read Data:");
-//  Serial.println(recivedData2);
-//  delay(1000);
+   String recivedData2;
+  recivedData2 = read_String(22);
+  Serial.print("Read Data:");
+  Serial.println(recivedData2);
+  delay(1000);
 
-//  Serial.println(EEPROM.read(40));  //Address 10 and String type data
-//  delay(1000);
+  Serial.println(EEPROM.read(40));  //Address 10 and String type data
+  delay(1000);
 
 //  Serial.println(EEPROM.read(45));  //Address 10 and String type data
 //  delay(1000);
