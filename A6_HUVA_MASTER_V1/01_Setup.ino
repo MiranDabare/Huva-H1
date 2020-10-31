@@ -90,6 +90,7 @@ void setup(){
 //  Serial.println(AlertBeeper);
   delay(1000);
 
+  BufferTime = EEPROMReadlong(45);
 
 while (SignalOK == false)
 {
@@ -133,8 +134,11 @@ while (SignalOK == false)
     
 }
 
+//====================== BATTERY CHECK ======================
+
 void BatteryCheck()
 {
+
      int Count;
   Count = EEPROM.read(40);
   
@@ -149,8 +153,15 @@ void BatteryCheck()
 
   if (Count >= 3) //Sleep the arduino
   {
-   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+    unsigned int SleepCount;
+
+    for (SleepCount = 112; SleepCount > 0; SleepCount--)
+    {
+//      Serial.println("Im sleeping");
+      LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);     
+    }
     EEPROM.write(40, 0);  //Address 10 and String type data
+    
   }
 
 }

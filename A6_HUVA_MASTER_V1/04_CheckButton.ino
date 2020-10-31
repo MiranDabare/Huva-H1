@@ -35,7 +35,7 @@ void CheckButton()
       {
         PressTime = 0;
         Beeper(); //Turn on the LED to let the user know alert has been set
-        Serial.println("Button Pressed");
+//        Serial.println("Button Pressed");
         TriggerArmed =  true;
         delay(2000); // Delay to let go of the button
         Clock2 = millis();

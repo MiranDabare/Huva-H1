@@ -74,6 +74,10 @@ int PressTime = 0;
 int Clock = 0;
 int Clock2 = 0;
 
+int AlertCount = 120;
+
+long BufferTime = 5000;
+
  bool SetupDone = false;
 
  void(* resetFunc) (void) = 0;
