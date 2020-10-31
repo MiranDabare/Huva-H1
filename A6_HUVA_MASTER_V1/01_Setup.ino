@@ -107,7 +107,7 @@ while (SignalOK == false)
 //   Serial.println(Signal.toInt());
     incomingData.remove(0);  
 
-    if (Signal.toInt() >= 20)
+    if (Signal.toInt() >= 10)
     {
 //      Serial.println("Signal is gud!");
       SignalOK = true;

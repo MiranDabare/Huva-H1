@@ -504,20 +504,19 @@ void Test5_Init()
 
 
 
-    SIM900.print("AT+CUSD=0\r"); 
-    delay(2000);
-  SIM900.println("AT+CMGF=1");    //Set the GSM Module in Text Mode
-  delay(2000);  
-    SIM900.println("AT+CMGS=\"" + TestNumber + "\""); // Replace it with your mobile number
-  delay(2000);
-  SIM900.println(TestMessage);   // The SMS text you want to send
-  delay(2000);
-  SIM900.println((char)26);  // ASCII code of CTRL+Z
-  delay(2000);
-  SIM900.println();
-  delay(2000);  
-  SIM900.print("AT+CUSD=2\r"); 
-  RGB_color(0, 255, 255); // Blue
+  Serial.println("Initializing..."); 
+  delay(1000);
+
+  SIM900.println("AT"); //Once the handshake test is successful, it will back to OK
+  updateSerial();
+
+  SIM900.println("AT+CMGF=1"); // Configuring TEXT mode
+  updateSerial();
+  SIM900.println("AT+CMGS=\"+0774061725\"");//change ZZ with country code and xxxxxxxxxxx with phone number to sms
+  updateSerial();
+  SIM900.print("Last Minute Engineers | lastminuteengineers.com"); //text content
+  updateSerial();
+  SIM900.write(26);
   
   Pass =true;
   
@@ -595,6 +594,19 @@ void receive_message()
 
     }
    }
+
+   void updateSerial()
+{
+  delay(500);
+  while (Serial.available()) 
+  {
+    SIM900.write(Serial.read());//Forward what Serial received to Software Serial Port
+  }
+  while(SIM900.available()) 
+  {
+    Serial.write(SIM900.read());//Forward what Software Serial received to Serial Port
+  }
+}
 
 
 void Test7() //Siren Transmitter Test 

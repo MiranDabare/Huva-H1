@@ -4,6 +4,8 @@
 SoftwareSerial mySerial(11, 10); //A6 Tx & Rx is connected to Arduino #3 & #2
 //String Store = "START - ";
 
+//AT+IPR=9600
+
 void setup()
 {
 
@@ -14,9 +16,10 @@ digitalWrite(4, HIGH);
 delay(5000);
 
   //Begin serial communication with Arduino and Arduino IDE (Serial Monitor)
-  Serial.begin(9600);
-  
-  //Begin serial communication with Arduino and A6
+//  Serial.begin(115200);
+//  mySerial.begin(115200);
+
+    Serial.begin(9600);
   mySerial.begin(9600);
 
   Serial.println("Initializing...");
